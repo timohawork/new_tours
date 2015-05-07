@@ -1,0 +1,32 @@
+.container {
+	border: 2px solid #DDD;
+}
+
+.container h1 {
+	display: inline-block;
+	margin: 10px 0;
+}
+
+#request,
+#response {
+	padding: 15px;
+	border: 1px solid #DDD;
+	border-radius: 10px;
+}
+
+#response {
+	margin-bottom: 15px;
+}
+
+#response h3 {
+	margin: 5px 0;
+}
+
+#response .error-row,
+#response .error-row h3 {
+	color: #C00;
+}
+
+#request .btn-primary {
+	width: 935px;
+}
