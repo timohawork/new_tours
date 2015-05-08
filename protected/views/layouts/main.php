@@ -12,7 +12,7 @@
 		<script type="text/javascript" src="/js/bootstrap-datepicker.ru.js"></script>
 		<script type="text/javascript" src="/js/functions.js"></script>
 		<?php if (!Yii::app()->user->isGuest) : ?>
-			<?php /*<script src="http://api-maps.yandex.ru/1.1/index.xml?key=<?=Yii::app()->params->yandexMapsAPI?>" type="text/javascript"></script>*/ ?>
+			<script src="http://api-maps.yandex.ru/1.1/index.xml" type="text/javascript"></script>
 			<script type="text/javascript" src="/js/jquery.form.js"></script>
 			<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 		<?php endif; ?>
@@ -25,7 +25,7 @@
 					<h3><a href="/">Экскурсии</a></h3>
 				</li>
 				<li class="list-group-item">
-					<a href="/points/edit"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Объекты</h4></a>
+					<a href="/points"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Объекты</h4></a>
 				</li>
 				<li class="list-group-item">
 					<a href="/routs"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Маршруты</h4></a>
@@ -34,7 +34,7 @@
 					<a href="/tours/edit"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Экскурсии</h4></a>
 				</li>
 				<li class="list-group-item">
-					<a id="" href="#"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Гиды</h4></a>
+					<a id="" href="/guides"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Гиды</h4></a>
 				</li>
 				<li class="list-group-item">
 					<a id="" href="#"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Транспорт</h4></a>

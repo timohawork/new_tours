@@ -1,22 +1,45 @@
 <?php
 
-class PointPhotos extends ApModel
+/**
+ * This is the model class for table "point_photos".
+ *
+ * The followings are the available columns in table 'rout_photos':
+ * @property integer $id
+ * @property integer $pointId
+ * @property string $name
+ * @property string $previewProp
+ *
+ * The followings are the available model relations:
+ * @property Points $point
+ */
+class PointPhotos extends CActiveRecord
 {
 	const DIR_NAME = "images";
 	
-	public function tableName() {
+	/**
+	 * @return string the associated database table name
+	 */
+	public function tableName()
+	{
 		return 'point_photos';
 	}
 
+	/**
+	 * @return array validation rules for model attributes.
+	 */
 	public function rules()
 	{
 		return array(
 			array('pointId, name', 'required'),
 			array('pointId', 'numerical', 'integerOnly' => true),
-			array('name', 'length', 'max' => 100)
+			array('name', 'length', 'max' => 100),
+			array('previewProp', 'length', 'max' => 20)
 		);
 	}
 
+	/**
+	 * @return array relational rules.
+	 */
 	public function relations()
 	{
 		return array(
@@ -24,16 +47,26 @@ class PointPhotos extends ApModel
 		);
 	}
 
+	/**
+	 * @return array customized attribute labels (name=>label)
+	 */
 	public function attributeLabels()
 	{
 		return array(
 			'id' => 'ID',
 			'pointId' => 'Point',
 			'name' => 'Name',
+			'previewProp' => 'Preview Prop',
 		);
 	}
 
-	public static function model($className=__CLASS__)
+	/**
+	 * Returns the static model of the specified AR class.
+	 * Please note that you should have this exact method in all your CActiveRecord descendants!
+	 * @param string $className active record class name.
+	 * @return RoutPhotos the static model class
+	 */
+	public static function model($className = __CLASS__)
 	{
 		return parent::model($className);
 	}
@@ -41,8 +74,9 @@ class PointPhotos extends ApModel
 	public function delete()
 	{
 		foreach (array_keys(self::getSizes()) as $size) {
-			unlink(dirname(__FILE__).'/../../public/'.self::DIR_NAME.'/'.$this->pointId.'/'.$this->name.'_'.$size.'.jpg');
+			unlink(dirname(__FILE__).'/../../public/'.$this->getUrl($size));
 		}
+		unlink(dirname(__FILE__).'/../../public/'.$this->getUrl('master'));
 		parent::delete();
 	}
 	
@@ -55,8 +89,8 @@ class PointPhotos extends ApModel
 		);
 	}
 	
-	public function getImage($size = 'small')
+	public function getUrl($size = 'small')
 	{
-		return '<img class="img-thumbnail" src="'.self::DIR_NAME.'/'.$this->markId.'/'.$this->name.'_'.$size.'.jpg" alt="">';
+		return '/'.self::DIR_NAME.'/points/'.$this->pointId.'/'.$this->name.'_'.$size.'.jpg';
 	}
 }

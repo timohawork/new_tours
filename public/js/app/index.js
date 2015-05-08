@@ -147,16 +147,6 @@ $(document).ready(function() {
 	
 	/* ---------------------------------------------------------------------- */
 	
-	$('#add-map').live('click', function() {
-		var block = $('#map-marker').parent();
-		if (!block.hasClass('hide')) {
-			return false;
-		}
-		block.removeClass('hide');
-		setMap('#map-marker', true, $('#coord-input').val());
-		return false;
-	});
-	
 	$('.ap-block .fa-times, .modal .fa-times').live('click', function() {
 		if ($(this).closest('#image-editor').length || !confirm('Вы уверены, что хотите удалить запись?')) {
 			return false;
@@ -181,30 +171,6 @@ $(document).ready(function() {
 			success: function(response) {
 				refreshTable();
 			}
-		});
-		return false;
-	});
-	
-	$('.preview-image .fa-pencil').live('click', function() {
-		var self = $(this),
-			img = $(this).prev(),
-			prop = img.attr('data-prop');
-		if (!undef(prop) && prop.length) {
-			prop = prop.split('x');
-		}
-		imageEditor.init($('#title-input').val(), img.attr('src').replace('_small', '_view'), self.closest('.photo').attr('data-id'), 'marks', prop, function() {
-			$('#mark-photo-id').val(self.closest('.photo').attr('data-id'));
-			$('#photo-file').trigger('click');
-		}, function() {
-			var block = self.closest('.photo');
-			block.remove();
-			var count = $('#mark-view .photos .photo:not(.add)').length;
-			if (3 > count && !$('#mark-view .photo.add').length) {
-				$('#mark-view .photos').append('<div class="photo add"><i class="fa fa-plus fa-2x"></i></div>');
-			}
-			refreshTable();
-		}, function(props) {
-			img.attr('data-prop', props.join('x'));
 		});
 		return false;
 	});

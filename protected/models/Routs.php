@@ -8,7 +8,6 @@ class Routs extends ApModel
 
 	public function rules() {
 		return array(
-			array('uid', 'required'),
 			array('complexity, active', 'numerical', 'integerOnly' => true),
 			array('uid', 'length', 'max' => 32),
 			array('title', 'length', 'max' => 128),
@@ -19,7 +18,6 @@ class Routs extends ApModel
 	public function relations() {
 		return array(
             'points' => array(self::HAS_MANY, 'RoutPoints', 'routId'),
-            'region' => array(self::BELONGS_TO, 'Regions', 'regionId'),
             'tours' => array(self::HAS_MANY, 'Tours', 'routId'),
 			'images' => array(self::HAS_MANY, 'RoutPhotos', 'routId')
         );
@@ -38,5 +36,12 @@ class Routs extends ApModel
 
 	public static function model($className = __CLASS__) {
 		return parent::model($className);
+	}
+	
+	public function save($runValidation = true, $attributes = null) {
+		if ($this->isNewRecord) {
+			$this->uid = md5(date("Y-m-d H:i:s").rand(1000, 10000));
+		}
+		parent::save($runValidation, $attributes);
 	}
 }

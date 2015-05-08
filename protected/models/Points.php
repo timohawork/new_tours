@@ -10,8 +10,8 @@ class Points extends ApModel
 
 	public function rules() {
 		return array(
-			array('uid, title, ll, rating, ratingTeh, type', 'required'),
-			array('parentId, rating, ratingTeh, type, active', 'numerical', 'integerOnly' => true),
+			array('title, rating, ratingTeh', 'required'),
+			array('parentId, rating, ratingTeh, active', 'numerical', 'integerOnly' => true),
 			array('uid', 'length', 'max' => 32),
 			array('title', 'length', 'max' => 128),
 			array('shortDesc', 'length', 'max' => 255),
@@ -25,6 +25,7 @@ class Points extends ApModel
             'parent' => array(self::BELONGS_TO, 'Points', 'parentId'),
             'points' => array(self::HAS_MANY, 'Points', 'parentId'),
             'routs' => array(self::MANY_MANY, 'Routs', 'rout_points(pointId, routId)'),
+			'images' => array(self::HAS_MANY, 'PointPhotos', 'pointId')
         );
 	}
 
@@ -39,12 +40,18 @@ class Points extends ApModel
 			'll' => 'Ll',
 			'rating' => 'Rating',
 			'ratingTeh' => 'Rating Teh',
-			'type' => 'Type',
 			'active' => 'Active',
 		);
 	}
 
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
+	}
+	
+	public function save($runValidation = true, $attributes = null) {
+		if ($this->isNewRecord) {
+			$this->uid = md5(date("Y-m-d H:i:s").rand(1000, 10000));
+		}
+		parent::save($runValidation, $attributes);
 	}
 }

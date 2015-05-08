@@ -5825,3 +5825,350 @@ Stack trace:
 REQUEST_URI=/photos/frame_edit
 HTTP_REFERER=http://new-tours/
 ---
+2015/05/07 13:50:37 [error] [php] Undefined variable: data (/var/www/new-tours/protected/controllers/PhotosController.php:87)
+Stack trace:
+#0 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): PhotosController->runAction()
+#1 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/new-tours/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): PhotosController->filterAccessControl()
+#4 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/new-tours/framework/web/CController.php(1116): CFilterChain->run()
+#6 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): PhotosController->filterPostOnly()
+#7 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#8 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#9 /var/www/new-tours/framework/web/CController.php(265): PhotosController->runActionWithFilters()
+#10 /var/www/new-tours/framework/web/CWebApplication.php(282): PhotosController->run()
+#11 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#12 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/new-tours/public/index.php(13): CWebApplication->run()
+REQUEST_URI=/photos/upload
+in /var/www/new-tours/protected/controllers/PhotosController.php (87)
+in /var/www/new-tours/public/index.php (13)
+2015/05/07 15:09:48 [error] [system.db.CDbCommand] Не удалось выполнить CDbCommand::execute(): SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`new_tours`.`routs`, CONSTRAINT `fk_routs_regions` FOREIGN KEY (`regionId`) REFERENCES `regions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE). Выполнявшийся SQL-запрос: INSERT INTO `routs` (`complexity`, `active`, `title`, `description`, `uid`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4).
+in /var/www/new-tours/protected/models/Routs.php (46)
+in /var/www/new-tours/protected/controllers/RoutsController.php (41)
+in /var/www/new-tours/public/index.php (13)
+2015/05/07 15:09:48 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand не удалось исполнить SQL-запрос: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`new_tours`.`routs`, CONSTRAINT `fk_routs_regions` FOREIGN KEY (`regionId`) REFERENCES `regions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `routs` (`complexity`, `active`, `title`, `description`, `uid`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4)' in /var/www/new-tours/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/new-tours/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/new-tours/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/new-tours/protected/models/Routs.php(46): CActiveRecord->save(true, NULL)
+#3 /var/www/new-tours/protected/controllers/RoutsController.php(41): Routs->save()
+#4 [internal function]: RoutsController->actionEdit(NULL)
+#5 /var/www/new-tours/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(RoutsController), Array)
+#6 /var/www/new-tours/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(RoutsController), Object(ReflectionMethod), Array)
+#7 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('edit')
+#16 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('routs/edit')
+#17 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/new-tours/public/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/routs/edit
+HTTP_REFERER=http://new-tours/routs/edit
+---
+2015/05/07 15:09:59 [error] [system.db.CDbCommand] Не удалось выполнить CDbCommand::execute(): SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`new_tours`.`routs`, CONSTRAINT `fk_routs_regions` FOREIGN KEY (`regionId`) REFERENCES `regions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE). Выполнявшийся SQL-запрос: INSERT INTO `routs` (`complexity`, `active`, `title`, `description`, `uid`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4).
+in /var/www/new-tours/protected/models/Routs.php (46)
+in /var/www/new-tours/protected/controllers/RoutsController.php (41)
+in /var/www/new-tours/public/index.php (13)
+2015/05/07 15:09:59 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand не удалось исполнить SQL-запрос: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`new_tours`.`routs`, CONSTRAINT `fk_routs_regions` FOREIGN KEY (`regionId`) REFERENCES `regions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `routs` (`complexity`, `active`, `title`, `description`, `uid`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4)' in /var/www/new-tours/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/new-tours/framework/db/ar/CActiveRecord.php(1077): CDbCommand->execute()
+#1 /var/www/new-tours/framework/db/ar/CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 /var/www/new-tours/protected/models/Routs.php(46): CActiveRecord->save(true, NULL)
+#3 /var/www/new-tours/protected/controllers/RoutsController.php(41): Routs->save()
+#4 [internal function]: RoutsController->actionEdit(NULL)
+#5 /var/www/new-tours/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(RoutsController), Array)
+#6 /var/www/new-tours/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(RoutsController), Object(ReflectionMethod), Array)
+#7 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('edit')
+#16 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('routs/edit')
+#17 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/new-tours/public/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/routs/edit
+HTTP_REFERER=http://new-tours/routs/edit
+---
+2015/05/07 15:56:14 [error] [exception.CException] exception 'CException' with message 'В классе RoutPhotos и его поведениях не найден метод или замыкание с именем "getImage".' in /var/www/new-tours/framework/base/CComponent.php:266
+Stack trace:
+#0 /var/www/new-tours/framework/db/ar/CActiveRecord.php(227): CComponent->__call('getImage', Array)
+#1 /var/www/new-tours/protected/views/routs/layouts/list.php(6): CActiveRecord->__call('getImage', Array)
+#2 /var/www/new-tours/protected/views/routs/layouts/list.php(6): RoutPhotos->getImage('small')
+#3 /var/www/new-tours/framework/web/CBaseController.php(126): require('/var/www/new-to...')
+#4 /var/www/new-tours/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/new-to...', Array, true)
+#5 /var/www/new-tours/framework/web/CController.php(869): CBaseController->renderFile('/var/www/new-to...', Array, true)
+#6 /var/www/new-tours/protected/views/routs/index.php(9): CController->renderPartial('layouts/list', Array)
+#7 /var/www/new-tours/framework/web/CBaseController.php(126): require('/var/www/new-to...')
+#8 /var/www/new-tours/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/new-to...', Array, true)
+#9 /var/www/new-tours/framework/web/CController.php(869): CBaseController->renderFile('/var/www/new-to...', Array, true)
+#10 /var/www/new-tours/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#11 /var/www/new-tours/protected/controllers/RoutsController.php(26): CController->render('index', Array)
+#12 /var/www/new-tours/framework/web/actions/CInlineAction.php(49): RoutsController->actionIndex()
+#13 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#14 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#15 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#16 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#17 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#18 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#19 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#20 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#21 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('')
+#22 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('routs')
+#23 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#24 /var/www/new-tours/public/index.php(13): CApplication->run()
+#25 {main}
+REQUEST_URI=/routs
+HTTP_REFERER=http://new-tours/routs/edit/id/4
+---
+2015/05/07 15:57:40 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "Points.images".' in /var/www/new-tours/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/new-tours/framework/db/ar/CActiveRecord.php(145): CComponent->__get('images')
+#1 /var/www/new-tours/protected/views/points/layouts/list.php(5): CActiveRecord->__get('images')
+#2 /var/www/new-tours/framework/web/CBaseController.php(126): require('/var/www/new-to...')
+#3 /var/www/new-tours/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/new-to...', Array, true)
+#4 /var/www/new-tours/framework/web/CController.php(869): CBaseController->renderFile('/var/www/new-to...', Array, true)
+#5 /var/www/new-tours/protected/views/points/index.php(9): CController->renderPartial('layouts/list', Array)
+#6 /var/www/new-tours/framework/web/CBaseController.php(126): require('/var/www/new-to...')
+#7 /var/www/new-tours/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/new-to...', Array, true)
+#8 /var/www/new-tours/framework/web/CController.php(869): CBaseController->renderFile('/var/www/new-to...', Array, true)
+#9 /var/www/new-tours/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#10 /var/www/new-tours/protected/controllers/PointsController.php(26): CController->render('index', Array)
+#11 /var/www/new-tours/framework/web/actions/CInlineAction.php(49): PointsController->actionIndex()
+#12 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#13 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#14 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#15 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#16 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#17 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#18 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#19 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('')
+#21 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('points')
+#22 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /var/www/new-tours/public/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/points
+HTTP_REFERER=http://new-tours/points/edit
+---
+2015/05/07 16:05:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "js/app/points.js".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('js/app/points.j...')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/app/points.js
+HTTP_REFERER=http://new-tours/points
+---
+2015/05/07 16:07:44 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "Points.type".' in /var/www/new-tours/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/new-tours/framework/db/ar/CActiveRecord.php(145): CComponent->__get('type')
+#1 /var/www/new-tours/framework/validators/CRequiredValidator.php(58): CActiveRecord->__get('type')
+#2 /var/www/new-tours/framework/validators/CValidator.php(213): CRequiredValidator->validateAttribute(Object(Points), 'type')
+#3 /var/www/new-tours/framework/base/CModel.php(159): CValidator->validate(Object(Points), NULL)
+#4 /var/www/new-tours/framework/db/ar/CActiveRecord.php(805): CModel->validate(NULL)
+#5 /var/www/new-tours/protected/models/Points.php(56): CActiveRecord->save(Array, NULL)
+#6 /var/www/new-tours/protected/models/ApModel.php(9): Points->save(Array)
+#7 /var/www/new-tours/protected/controllers/PointsController.php(55): ApModel->toggleActive()
+#8 [internal function]: PointsController->actionActivate('1')
+#9 /var/www/new-tours/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PointsController), Array)
+#10 /var/www/new-tours/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PointsController), Object(ReflectionMethod), Array)
+#11 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#12 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#13 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#14 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#15 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#16 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#17 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#18 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('activate')
+#20 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('points/activate...')
+#21 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/new-tours/public/index.php(13): CApplication->run()
+#23 {main}
+REQUEST_URI=/points/activate/id/1
+HTTP_REFERER=http://new-tours/points
+---
+2015/05/07 16:08:00 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "Points.type".' in /var/www/new-tours/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/new-tours/framework/db/ar/CActiveRecord.php(145): CComponent->__get('type')
+#1 /var/www/new-tours/framework/validators/CRequiredValidator.php(58): CActiveRecord->__get('type')
+#2 /var/www/new-tours/framework/validators/CValidator.php(213): CRequiredValidator->validateAttribute(Object(Points), 'type')
+#3 /var/www/new-tours/framework/base/CModel.php(159): CValidator->validate(Object(Points), NULL)
+#4 /var/www/new-tours/framework/db/ar/CActiveRecord.php(805): CModel->validate(NULL)
+#5 /var/www/new-tours/protected/models/Points.php(56): CActiveRecord->save(Array, NULL)
+#6 /var/www/new-tours/protected/models/ApModel.php(9): Points->save(Array)
+#7 /var/www/new-tours/protected/controllers/PointsController.php(55): ApModel->toggleActive()
+#8 [internal function]: PointsController->actionActivate('1')
+#9 /var/www/new-tours/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PointsController), Array)
+#10 /var/www/new-tours/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PointsController), Object(ReflectionMethod), Array)
+#11 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#12 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#13 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#14 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#15 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#16 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#17 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#18 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('activate')
+#20 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('points/activate...')
+#21 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /var/www/new-tours/public/index.php(13): CApplication->run()
+#23 {main}
+REQUEST_URI=/points/activate/id/1
+HTTP_REFERER=http://new-tours/points
+---
+2015/05/07 16:18:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Такого объекта не существует' in /var/www/new-tours/protected/controllers/PointsController.php:31
+Stack trace:
+#0 [internal function]: PointsController->actionEdit('17')
+#1 /var/www/new-tours/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PointsController), Array)
+#2 /var/www/new-tours/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PointsController), Object(ReflectionMethod), Array)
+#3 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('edit')
+#12 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('points/edit/id/...')
+#13 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/new-tours/public/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/points/edit/id/17
+---
+2015/05/07 16:48:42 [error] [php] mkdir(): Permission denied (/var/www/new-tours/protected/controllers/PhotosController.php:45)
+Stack trace:
+#0 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): PhotosController->runAction()
+#2 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/new-tours/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#4 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): PhotosController->filterAccessControl()
+#5 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#6 /var/www/new-tours/framework/web/CController.php(1116): CFilterChain->run()
+#7 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): PhotosController->filterPostOnly()
+#8 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#9 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/new-tours/framework/web/CController.php(265): PhotosController->runActionWithFilters()
+#11 /var/www/new-tours/framework/web/CWebApplication.php(282): PhotosController->run()
+#12 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/new-tours/public/index.php(13): CWebApplication->run()
+REQUEST_URI=/photos/upload
+in /var/www/new-tours/protected/controllers/PhotosController.php (45)
+in /var/www/new-tours/public/index.php (13)
+2015/05/07 16:49:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "images/routs/undefined/1431002948_small.jpg".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('images/routs/un...')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/routs/undefined/1431002948_small.jpg
+HTTP_REFERER=http://new-tours/points/edit/id/1
+---
+2015/05/07 16:52:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "images/points/undefined/1431003165_view.jpg".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('images/points/u...')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/points/undefined/1431003165_view.jpg
+HTTP_REFERER=http://new-tours/points/edit/id/1
+---
+2015/05/07 16:52:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "images/points/undefined/1431003165_small.jpg".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('images/points/u...')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/points/undefined/1431003165_small.jpg
+HTTP_REFERER=http://new-tours/points/edit/id/1
+---
+2015/05/07 16:57:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "images/routs/1/1431003454_small.jpg".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('images/routs/1/...')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/routs/1/1431003454_small.jpg
+HTTP_REFERER=http://new-tours/points/edit/id/1
+---
+2015/05/07 19:59:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "favicon.ico".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/05/08 12:58:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "favicon.ico".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/05/08 12:58:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "favicon.ico".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/05/08 13:27:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "index".' in /var/www/new-tours/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/new-tours/framework/web/CController.php(270): CController->missingAction('')
+#1 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('')
+#2 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('guides')
+#3 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/new-tours/public/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/guides
+HTTP_REFERER=http://new-tours/routs/edit/id/4
+---
+2015/05/08 13:39:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "js/app/guides.js".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('js/app/guides.j...')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/app/guides.js
+HTTP_REFERER=http://new-tours/guides
+---
+2015/05/08 14:38:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "activation".' in /var/www/new-tours/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/new-tours/framework/web/CController.php(270): CController->missingAction('activation')
+#1 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('activation')
+#2 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('guides/activati...')
+#3 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/new-tours/public/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/guides/activation/id/1
+HTTP_REFERER=http://new-tours/guides
+---
+2015/05/08 14:38:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "activation".' in /var/www/new-tours/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/new-tours/framework/web/CController.php(270): CController->missingAction('activation')
+#1 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('activation')
+#2 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('guides/activati...')
+#3 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/new-tours/public/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/guides/activation/id/1
+HTTP_REFERER=http://new-tours/guides
+---

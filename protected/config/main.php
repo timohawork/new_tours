@@ -64,6 +64,6 @@ return array(
 		)
     ),
     'params' => array(
-        'yandexMapsAPI' => 'AEJHoFMBAAAAUnBmEwIAPTLl-8Y9m8125E1pEmu2TMIG79EAAAAAAAAAAAD5cz-n0HEufya6UVHbgvKGXH6DSw=='
+        'yandexMapsAPI' => ''
     ),
 );

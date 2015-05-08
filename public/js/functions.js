@@ -8,7 +8,7 @@ function setMap(selector, editable, value)
 		map = new YMaps.Map($(selector)),
 		startPoint = new YMaps.GeoPoint(2 == value.length ? value[0] : 34.413538444787285, 2 == value.length ? value[1] : 45.32359471957162),
 		placemark = new YMaps.Placemark(startPoint);
-	map.setCenter(startPoint, 7);
+	map.setCenter(startPoint, 2 == value.length ? 12 : 8);
 	map.addControl(new YMaps.TypeControl());
 	map.addControl(new YMaps.Zoom());
 	map.addOverlay(placemark);
@@ -19,7 +19,7 @@ function setMap(selector, editable, value)
 				map.removeOverlay(placemark);
 			}
 			var point = mEvent.getGeoPoint();
-			$('#coord-input').val(point.getLng()+', '+point.getLat());
+			$('#ll').val(point.getLng()+','+point.getLat());
 			placemark = new YMaps.Placemark(point);
 			map.addOverlay(placemark);
 		}, this);
@@ -296,6 +296,12 @@ var ImageEditor = function(settings)
 			options.left = props[3];
 			options.width = props[0];
 			options.height = props[1];
+		}
+		else {
+			options.top = 200;
+			options.left = 100;
+			options.width = 600;
+			options.height = 200;
 		}
 		$(options.modal+' .frame').css({
 			top: options.top+'px',

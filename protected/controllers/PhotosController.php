@@ -37,6 +37,9 @@ class PhotosController extends ApController
 		else if (!empty($_POST['regionId'])) {
 			$dir .= 'regions/'.$_POST['regionId'];
 		}
+		else if (!empty($_POST['pointId'])) {
+			$dir .= 'points/'.$_POST['pointId'];
+		}
 		$path = dirname(__FILE__).'/../../public/'.$dir;
 		if (!is_dir($path)) {
 			mkdir($path) && chmod($path, 0755);
@@ -81,6 +84,20 @@ class PhotosController extends ApController
 				'regionId' => $regionModel->id
 			);
 		}
+		else if (!empty($_POST['pointId'])) {
+			if (null === Points::model()->findByPk($_POST['pointId'])) {
+				Yii::app()->end();
+			}
+			$photoModel = new PointPhotos();
+			if (!empty($_POST['pointPhotoId']) && null === ($photoModel = PointPhotos::model()->findByPk($_POST['pointPhotoId']))) {
+				Yii::app()->end();
+			}
+			$photoModel->pointId = $_POST['pointId'];
+			$photoModel->name = $name;
+			$photoModel->save();
+			$data = $photoModel->attributes;
+			$data['isNew'] = empty($_POST['pointPhotoId']);
+		}
 		
 		$this->jsonEcho(array(
 			'data' => $data
@@ -97,6 +114,10 @@ class PhotosController extends ApController
 				$model = RoutPhotos::model()->findByPk($_POST['id']);
 			break;
 		
+			case 'points':
+				$model = PointPhotos::model()->findByPk($_POST['id']);
+			break;
+		
 			case 'regions':
 				$model = Regions::model()->findByPk($_POST['id']);
 			break;
@@ -105,13 +126,13 @@ class PhotosController extends ApController
 		if (null === $model) {
 			Yii::app()->end();
 		}
-		if ($model instanceof RoutPhotos) {
-			$model->delete();
-		}
-		else {
+		if ($model instanceof Regions) {
 			$model->image = null;
 			$model->previewProp = null;
 			$model->save();
+		}
+		else {
+			$model->delete();
 		}
 	}
 	
@@ -125,6 +146,9 @@ class PhotosController extends ApController
 		else if ('routs' === $_POST['type']) {
 			$model = RoutPhotos::model();
 		}
+		else if ('points' === $_POST['type']) {
+			$model = PointPhotos::model();
+		}
 		if (null === ($model = $model->findByPk($_POST['id']))) {
 			Yii::app()->end();
 		}
@@ -134,6 +158,9 @@ class PhotosController extends ApController
 		}
 		else if ('routs' === $_POST['type']) {
 			$name .= $model->routId.'/'.$model->name;
+		}
+		else if ('points' === $_POST['type']) {
+			$name .= $model->pointId.'/'.$model->name;
 		}
 		$image = new Image($name.'_view.jpg');
 		$image->crop($_POST['width'], $_POST['height'], $_POST['top'], $_POST['left'])
