@@ -1,6 +1,6 @@
 <?php
 
-class GuidesController extends ApController
+class CarsController extends ApController
 {
 	public function filters()
 	{
@@ -11,47 +11,49 @@ class GuidesController extends ApController
 	}
 	
 	public function actionIndex() {
-		$guides = Guides::model()->findAll();
+		$cars = Cars::model()->findAll();
 		
 		if (Yii::app()->request->isAjaxRequest) {
 			$this->jsonEcho(array('html' => $this->renderPartial('layouts/list', array(
-				'guides' => $guides
+				'cars' => $cars
 			), true)));
 		}
 		
 		Yii::app()->getClientScript()
-			->registerScriptFile('/js/app/guides.js');
+			->registerScriptFile('/js/app/cars.js');
 		$this->render('index', array(
-			'guides' => $guides,
+			'cars' => $cars,
 			'regions' => Regions::model()->findAll()
 		));
 	}
 	
 	public function actionEdit() {
-		if (!empty($_POST['id']) && null === ($model = Guides::model()->findByPk($_POST['id']))) {
+		if (!empty($_POST['id']) && null === ($model = Cars::model()->findByPk($_POST['id']))) {
 			return false;
 		}
 		if (empty($_POST['id'])) {
-			$model = new Guides();
+			$model = new Cars();
 		}
 		$model->name = $_POST['name'];
-		$model->spec = $_POST['spec'];
-		$model->baseRegion = $_POST['baseRegion'];
+		$model->type = $_POST['type'];
+		$model->passCount = $_POST['passCount'];
+		$model->comfort = $_POST['comfort'];
 		$model->phone = $_POST['phone'];
 		$model->rating = $_POST['rating'];
+		$model->baseRegion = $_POST['baseRegion'];
 		$model->regionIds = !empty($_POST['regions']) ? implode(",", array_keys($_POST['regions'])) : null;
 		$model->save();
 	}
 	
 	public function actionActivate($id) {
-		if (null === ($model = Guides::model()->findByPk($id))) {
+		if (null === ($model = Cars::model()->findByPk($id))) {
 			Yii::app()->end();
 		}
 		$model->toggleActive();
 	}
 	
 	public function actionDelete($id) {
-		if (null === ($model = Guides::model()->findByPk($id))) {
+		if (null === ($model = Cars::model()->findByPk($id))) {
 			Yii::app()->end();
 		}
 		$model->delete();

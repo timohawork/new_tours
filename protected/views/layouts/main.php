@@ -37,7 +37,7 @@
 					<a id="" href="/guides"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Гиды</h4></a>
 				</li>
 				<li class="list-group-item">
-					<a id="" href="#"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Транспорт</h4></a>
+					<a id="" href="/cars"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Транспорт</h4></a>
 				</li>
 				<li class="list-group-item">
 					<a id="" href="#"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Заявки</h4></a>

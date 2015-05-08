@@ -2,41 +2,43 @@ $(document).ready(function() {
 	$('#add-new, .edit').live('click', function() {
 		var isNew = !$(this).hasClass('edit'),
 			tr = $(this).closest('tr');
-		$('#guide-edit form')[0].reset();
-		$('#guide-edit input[type="checkbox"]').attr("checked", false);
+		$('#car-edit form')[0].reset();
+		$('#car-edit input[type="checkbox"]').attr("checked", false);
 		removeErrors('#guide-edit form');
-		$('#guide-edit .modal-title').text(isNew ? 'Новые гид' : 'Редактирование гида');
+		$('#car-edit .modal-title').text(isNew ? 'Новый транспорт' : 'Редактирование транспорта');
 		
 		$('#name-input').val(isNew ? '' : tr.find('.name').text());
-		$('#spec-select').val(isNew ? '' : tr.data('spec'));
-		$('#base-input').val(isNew ? '' : tr.data('base'));
+		$('#type-select').val(isNew ? '' : tr.data('type'));
+		$('#pass-count-input').val(isNew ? 0 : tr.find('.count').text());
+		$('#comfort-select').val(isNew ? 0 : tr.find('.comfort').text());
 		$('#phone-input').val(isNew ? '' : tr.find('.phone').text());
 		$('#rating-input').val(isNew ? 0 : tr.find('.rating').text());
+		$('#base-input').val(isNew ? '' : tr.data('base'));
 		if (!isNew) {
 			var regions = tr.data('regions')+'';
 			regions = regions.split(',');
 			$.each(regions, function(key, id) {
-				$('#guide-edit .regions input[name="regions['+id+']"]').attr("checked", true);
+				$('#car-edit .regions input[name="regions['+id+']"]').attr("checked", true);
 			});
 		}
-		$('#guide-id').val(isNew ? '' : tr.data('id'));
+		$('#car-id').val(isNew ? '' : tr.data('id'));
 		
-		$('#guide-edit').modal('show');
+		$('#car-edit').modal('show');
 		return false;
 	});
 	
-	$('#guide-edit .btn-primary').live('click', function() {
-		if (!isValidate('#guide-edit form')) {
+	$('#car-edit .btn-primary').live('click', function() {
+		if (!isValidate('#car-edit form')) {
 			return false;
 		}
 		$.ajax({
-			url: "/guides/edit",
+			url: "/cars/edit",
 			type: "POST",
 			async: true,
-			data: $('#guide-edit form').serializeArray(),
+			data: $('#car-edit form').serializeArray(),
 			success: function() {
 				refreshTable();
-				$('#guide-edit').modal('hide');
+				$('#car-edit').modal('hide');
 			}
 		});
 		return false;
@@ -44,7 +46,7 @@ $(document).ready(function() {
 	
 	$('.activation').live('click', function() {
 		$.ajax({
-			url: "/guides/activate/id/"+$(this).closest('tr').data('id'),
+			url: "/cars/activate/id/"+$(this).closest('tr').data('id'),
 			type: "POST",
 			async: true,
 			cache: false,
@@ -53,11 +55,11 @@ $(document).ready(function() {
 	});
 	
 	$('.del').live('click', function() {
-		if (!confirm("Вы уверены, что хотите удалить гида?")) {
+		if (!confirm("Вы уверены, что хотите удалить транспорт?")) {
 			return false;
 		}
 		$.ajax({
-			url: "/guides/delete/id/"+$(this).closest('tr').data('id'),
+			url: "/cars/delete/id/"+$(this).closest('tr').data('id'),
 			type: "POST",
 			async: true,
 			cache: false,
@@ -69,12 +71,12 @@ $(document).ready(function() {
 function refreshTable()
 {
 	$.ajax({
-		url: "/guides",
+		url: "/cars",
 		type: "POST",
 		async: true,
 		cache: false,
 		success: function(response) {
-			$('#guides_list').html(response.html);
+			$('#cars_list').html(response.html);
 		}
 	});
 }
