@@ -34,7 +34,10 @@ class OrdersController extends ApController
 		}
 		$this->jsonEcho(array(
 			'tourId' => $model->tourId,
-			'client' => $model->client->name,
+			'clientName' => $model->client->name,
+			'clientPhone' => $model->client->phone,
+			'comfort' => $model->tour->car->comfort,
+			'startTitle' => $model->tour->rout->getStartPoint()->title,
 			'passCount' => $model->passCount,
 			'isPaid' => $model->isPaid,
 			'paymentType' => $model->paymentType,

@@ -24,6 +24,10 @@
 						<div id="client-name" class="col-sm-8 text-only"></div>
 					</div>
 					<div class="form-group">
+						<label class="col-sm-3 control-label">Контактный телефон</label>
+						<div id="client-phone" class="col-sm-8 text-only"></div>
+					</div>
+					<div class="form-group">
 						<label for="tour-id" class="col-sm-3 control-label">Экскурсия</label>
 						<div class="col-sm-8">
 							<select id="tour-id" class="form-control" name="tourId" data-validate="required:1;">
@@ -39,6 +43,14 @@
 						<div class="col-sm-2">
 							<input id="pass-count" type="number" name="passCount" class="form-control" data-validate="required:1;min:0">
 						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Степень конфортности</label>
+						<div id="comfort" class="col-sm-8 text-only"></div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Стартовая точка</label>
+						<div id="start-object" class="col-sm-8 text-only"></div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-8">
@@ -68,7 +80,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-				<button type="button" class="btn btn-primary">ОК</button>
+				<button type="button" class="btn btn-primary">Сохранить</button>
 			</div>
 		</div>
 	</div>

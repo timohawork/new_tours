@@ -81,4 +81,9 @@ class ToursController extends ApController
 		}
 		$model->delete();
 	}
+	
+	public function actionTime_Diff()
+	{
+		$this->jsonEcho(array('time' => $_POST['startTime']));
+	}
 }

@@ -1,7 +1,7 @@
 $(document).ready(function() {
-	$('#add-new, .edit').live('click', function() {
-		var isNew = !$(this).hasClass('edit'),
-			tr = $(this).closest('tr');
+	$('#add-new, tr').live('click', function() {
+		var isNew = $(this).attr('id') === 'add-new',
+			tr = $(this);
 		$('#car-edit form')[0].reset();
 		$('#car-edit input[type="checkbox"]').attr("checked", false);
 		removeErrors('#car-edit form');
@@ -51,6 +51,7 @@ $(document).ready(function() {
 			async: true,
 			success: refreshTable
 		});
+		return false;
 	});
 	
 	$('.del').live('click', function() {
@@ -64,6 +65,7 @@ $(document).ready(function() {
 			cache: false,
 			success: refreshTable
 		});
+		return false;
 	});
 });
 

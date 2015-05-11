@@ -1,7 +1,7 @@
 $(document).ready(function() {
-	$('#add-new, .edit').live('click', function() {
-		var isNew = !$(this).hasClass('edit'),
-			tr = $(this).closest('tr');
+	$('#add-new, tr').live('click', function() {
+		var isNew = $(this).attr('id') === 'add-new',
+			tr = $(this);
 		$('#client-edit form')[0].reset();
 		removeErrors('#client-edit form');
 		$('#client-edit .modal-title').text(isNew ? 'Новый клиент' : 'Редактирование клиента');
@@ -55,6 +55,12 @@ $(document).ready(function() {
 			async: true,
 			success: refreshTable
 		});
+		return false;
+	});
+	
+	$('.orders').live('click', function() {
+		window.location.href = $(this).attr('href');
+		return false;
 	});
 	
 	$('.del').live('click', function() {
@@ -68,6 +74,7 @@ $(document).ready(function() {
 			cache: false,
 			success: refreshTable
 		});
+		return false;
 	});
 });
 

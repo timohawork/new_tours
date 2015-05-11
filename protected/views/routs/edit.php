@@ -136,7 +136,7 @@
 			<div class="form-group">
 				<div class="col-sm-8">
 					<button type="button" class="btn btn-default">Отмена</button>
-					<button type="submit" class="btn btn-primary">ОК</button>
+					<button type="submit" class="btn btn-primary">Сохранить</button>
 				</div>
 			</div>
 		</form>

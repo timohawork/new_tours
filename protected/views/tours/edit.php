@@ -89,14 +89,20 @@
 					</div>
 					<div class="form-group">
 						<label for="date-begin" class="col-sm-3 control-label">Дата и время начала</label>
-						<div class="col-sm-3">
+						<div class="col-sm-2">
 							<input id="start-date" type="text" name="startDate" data-validate="required:1" class="form-control" value="<?=DateHelper::getDate($model->startDate)?>">
+						</div>
+						<div class="col-sm-2">
+							<input id="start-time" type="text" name="startTime" data-validate="required:1" class="form-control timepicker" value="00:00">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="date-end" class="col-sm-3 control-label">Дата и время конца</label>
-						<div class="col-sm-3">
+						<div class="col-sm-2">
 							<input id="finish-date" type="text" name="finishDate" data-validate="required:1" class="form-control" value="<?=DateHelper::getDate($model->finishDate)?>">
+						</div>
+						<div class="col-sm-2">
+							<input id="finish-time" type="text" name="finishTime" class="form-control timepicker" value="00:00" disabled>
 						</div>
 					</div>
 					<div class="form-group">
@@ -161,7 +167,7 @@
 			<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-9">
 					<button type="button" class="btn btn-default">Отмена</button>
-					<button type="submit" class="btn btn-primary">ОК</button>
+					<button type="submit" class="btn btn-primary">Сохранить</button>
 				</div>
 			</div>
 		</form>

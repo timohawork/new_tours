@@ -17,6 +17,24 @@ $(document).ready(function() {
 		}
     });
 	
+	$('#start-time').live('change', function() {
+		var routId = $('#rout-id').val();
+		if (!routId) {
+			return true;
+		}
+		$.ajax({
+			url: "/tours/time_diff",
+			type: "POST",
+			data: {
+				id: routId,
+				startTime: $(this).val()
+			},
+			success: function(response) {
+				$('#finish-time').val(response.time);
+			}
+		});
+	});
+	
 	$('#rout-id').live('change', function() {
 		if (!$(this).val()) {
 			return;

@@ -1,7 +1,7 @@
 $(document).ready(function() {
-	$('#add-new, .edit').live('click', function() {
-		var isNew = !$(this).hasClass('edit'),
-			tr = $(this).closest('tr');
+	$('#add-new, tr').live('click', function() {
+		var isNew = $(this).attr('id') === 'add-new',
+			tr = $(this);
 		$('#order-edit form')[0].reset();
 		removeErrors('#order-edit form');
 		$('#order-edit .modal-title').text(isNew ? 'Новая заявка' : 'Редактирование заявки');
@@ -12,7 +12,10 @@ $(document).ready(function() {
 				type: "POST",
 				async: true,
 				success: function(response) {
-					$('#client-name').text(response.client);
+					$('#client-name').text(response.clientName);
+					$('#client-phone').text(response.clientPhone);
+					$('#comfort').text(response.comfort);
+					$('#start-object').text(response.startTitle);
 					$('#tour-id').val(response.tourId);
 					$('#pass-count').val(response.passCount);
 					setPaid(response.isPaid == 1, response.paymentType, response.summ);
@@ -60,6 +63,7 @@ $(document).ready(function() {
 			cache: false,
 			success: refreshTable
 		});
+		return false;
 	});
 });
 

@@ -21,7 +21,6 @@
 						<?php endif; ?>
 					</td>
 					<td class="edit-block">
-						<a href="#" class="edit"><i class="fa fa-pencil fa-lg"></i></a>
 						<a href="#" class="del"><i class="fa fa-trash-o fa-lg"></i></a>
 					</td>
 				</tr>

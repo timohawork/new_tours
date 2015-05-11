@@ -44,4 +44,13 @@ class Routs extends ApModel
 		}
 		parent::save($runValidation, $attributes);
 	}
+	
+	public function getStartPoint()
+	{
+		foreach ($this->points as $point) {
+			if ($point->type == RoutPoints::START) {
+				return $point->point;
+			}
+		}
+	}
 }

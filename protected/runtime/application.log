@@ -6460,3 +6460,67 @@ Stack trace:
 REQUEST_URI=/orders/edit
 HTTP_REFERER=http://new-tours/orders
 ---
+2015/05/11 15:29:25 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "Orders.car".' in /var/www/new-tours/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/new-tours/framework/db/ar/CActiveRecord.php(145): CComponent->__get('car')
+#1 /var/www/new-tours/protected/controllers/OrdersController.php(39): CActiveRecord->__get('car')
+#2 [internal function]: OrdersController->actionGet_Data('2')
+#3 /var/www/new-tours/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(OrdersController), Array)
+#4 /var/www/new-tours/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(OrdersController), Object(ReflectionMethod), Array)
+#5 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#8 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#12 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('get_data')
+#14 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('orders/get_data...')
+#15 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/new-tours/public/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/orders/get_data/id/2
+HTTP_REFERER=http://new-tours/orders
+---
+2015/05/11 15:29:36 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "Orders.car".' in /var/www/new-tours/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/new-tours/framework/db/ar/CActiveRecord.php(145): CComponent->__get('car')
+#1 /var/www/new-tours/protected/controllers/OrdersController.php(39): CActiveRecord->__get('car')
+#2 [internal function]: OrdersController->actionGet_Data('2')
+#3 /var/www/new-tours/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(OrdersController), Array)
+#4 /var/www/new-tours/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(OrdersController), Object(ReflectionMethod), Array)
+#5 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#8 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#12 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('get_data')
+#14 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('orders/get_data...')
+#15 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /var/www/new-tours/public/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/orders/get_data/id/2
+HTTP_REFERER=http://new-tours/orders
+---
+2015/05/11 17:31:16 [error] [php] Undefined index: routId (/var/www/new-tours/protected/controllers/ToursController.php:38)
+Stack trace:
+#0 /var/www/new-tours/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): ToursController->runAction()
+#3 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#4 /var/www/new-tours/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#5 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): ToursController->filterAccessControl()
+#6 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#7 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#8 /var/www/new-tours/framework/web/CController.php(265): ToursController->runActionWithFilters()
+#9 /var/www/new-tours/framework/web/CWebApplication.php(282): ToursController->run()
+#10 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/new-tours/public/index.php(13): CWebApplication->run()
+REQUEST_URI=/tours/edit/id/2
+in /var/www/new-tours/protected/controllers/ToursController.php (38)
+in /var/www/new-tours/public/index.php (13)

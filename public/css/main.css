@@ -410,6 +410,10 @@
 	color: #4da309;
 }
 
+.ap-blocks-list .table tr {
+	cursor: pointer;
+}
+
 #rout-edit #coord-input {
 	display: inline-block;
 	width: 320px;
@@ -527,17 +531,17 @@
 }
 
 #image-editor .buttons .fa-check {
-	left: 5px;
+	right: 5px;
 	color: #5ec50d;
 }
 
 #image-editor .buttons .fa-refresh {
-	left: 40px;
+	left: 388px;
 	color: #02a5de;
 }
 
 #image-editor .buttons .fa-trash-o {
-	right: 5px;
+	left: 5px;
 	color: #e72510;
 }
 
@@ -648,8 +652,7 @@
 	text-align: right;
 }
 
-.table-listing .edit-block a,
-.table-listing .success .activation:hover {
+.table-listing .edit-block a {
 	color: #bbb;
 }
 

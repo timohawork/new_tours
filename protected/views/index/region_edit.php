@@ -55,7 +55,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-				<button type="button" class="btn btn-primary">ОК</button>
+				<button type="button" class="btn btn-primary">Сохранить</button>
 			</div>
 		</div>
 	</div>
