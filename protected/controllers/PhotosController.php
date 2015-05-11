@@ -170,4 +170,15 @@ class PhotosController extends ApController
 		$model->save(array('previewProp'));
 		$this->jsonEcho(array());
 	}
+	
+	public function actionGet_Photos()
+	{
+		if (empty($_POST['type']) && empty($_POST['id'])) {
+			Yii::app()->end();
+		}
+		if ('routs' === $_POST['type'] && null === ($model = Routs::model()->findByPk($_POST['id']))) {
+			Yii::app()->end();
+		}
+		$this->jsonEcho(array('photos' => $model->images));
+	}
 }

@@ -70,7 +70,7 @@
 					<div class="form-group">
 						<label for="base-input" class="col-sm-3 control-label">Регион базирования</label>
 						<div class="col-sm-8">
-							<input id="base-input" type="text" name="baseRegion" data-validate="required:0" class="form-control">
+							<input id="base-input" type="text" name="baseRegion" data-validate="required:1" class="form-control">
 						</div>
 					</div>
 					<div class="form-group">

@@ -31,7 +31,7 @@
 					<a href="/routs"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Маршруты</h4></a>
 				</li>
 				<li class="list-group-item">
-					<a href="/tours/edit"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Экскурсии</h4></a>
+					<a href="/tours"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Экскурсии</h4></a>
 				</li>
 				<li class="list-group-item">
 					<a id="" href="/guides"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Гиды</h4></a>

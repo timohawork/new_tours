@@ -10,41 +10,75 @@ class ToursController extends ApController
 		);
 	}
 	
-	public function actionEdit($id = null) {
-		/*if (empty($_POST)) {
-			Yii::app()->end();
-		}
-		$typeModel = new Types();
-		$typeModel->attributes = $_POST;
-		$typeModel->save();
+	public function actionIndex() {
+		$tours = Tours::model()->findAll();
 		
-		TypesAttr::model()->deleteAllByAttributes(array('typeId' => $typeModel->id));
-		foreach ($_POST['attr']['name'] as $i => $name) {
-			$attrModel = new TypesAttr();
-			$attrModel->typeId = $typeModel->id;
-			$attrModel->title = $name;
-			$attrModel->type = $_POST['attr']['value'][$i];
-			$attrModel->save();
+		if (Yii::app()->request->isAjaxRequest) {
+			$this->jsonEcho(array('html' => $this->renderPartial('layouts/list', array(
+				'tours' => $tours
+			), true)));
 		}
-		$this->jsonEcho(array('types' => Types::getTypes()));*/
-		$this->render('edit', array(
-			
+		
+		Yii::app()->getClientScript()
+			->registerScriptFile('/js/app/tours.js');
+		$this->render('index', array(
+			'tours' => $tours
 		));
 	}
 	
-	public function actionGet_Type($id) {
-		if (null === ($typeModel = Types::model()->findByPk($id))) {
-			Yii::app()->end();
+	public function actionEdit($id = null) {
+		if (null !== $id && null === ($model = Tours::model()->findByPk($id))) {
+			throw new CHttpException(404, "Такой экскурсии не существует");
 		}
-		$data = $typeModel->attributes;
-		$data['attr'] = $typeModel->attr;
-		$this->jsonEcho(array('data' => $data));
+		else if (null === $id) {
+			$model = new Tours();
+		}
+		
+		if (Yii::app()->request->isPostRequest) {
+			$model->routId = $_POST['routId'];
+			$model->title = ArrayHelper::val($_POST, 'title', $model->rout->title);
+			$model->description = $_POST['description'];
+			$model->type = $_POST['type'];
+			$model->totalPass = $_POST['totalPass'];
+			$model->childPass = $_POST['childPass'];
+			$model->invalidPass = $_POST['invalidPass'];
+			$model->startDate = $_POST['startDate'];
+			$model->finishDate = $_POST['finishDate'];
+			$model->isAction = !empty($_POST['isAction']) ? 1 : 0;
+			
+			$model->guideId = $_POST['guideId'];
+			$model->carId = $_POST['carId'];
+			
+			$model->guideCost = $_POST['guideCost'];
+			$model->carCost = $_POST['carCost'];
+			$model->expenses = $_POST['expenses'];
+			$model->margin = $_POST['margin'];
+			
+			$model->save();
+			$this->redirect("/tours");
+		}
+		
+		Yii::app()->getClientScript()
+			->registerScriptFile('/js/app/tour_edit.js');
+		$this->render('edit', array(
+			'model' => $model,
+			'routs' => Routs::model()->findAll(),
+			'cars' => Cars::model()->findAll(),
+			'guides' => Guides::model()->findAll()
+		));
 	}
 	
 	public function actionActivate($id) {
-		if (null === ($groupModel = CityGroups::model()->findByPk($id))) {
+		if (null === ($model = Tours::model()->findByPk($id))) {
 			Yii::app()->end();
 		}
-		$groupModel->toggleActive();
+		$model->toggleActive();
+	}
+	
+	public function actionDelete($id) {
+		if (null === ($model = Tours::model()->findByPk($id))) {
+			Yii::app()->end();
+		}
+		$model->delete();
 	}
 }

@@ -92,7 +92,7 @@ $(document).ready(function() {
 	function addPhoto(data)
 	{
 		$('#images-block .photos').prepend('<div class="photo" data-id="'+data.id+'">'+
-			'<a class="preview-image" data-url="/images/routs/'+data.routId+'/'+data.name+'_view.jpg">'+
+			'<a class="preview-image" href="#" data-url="/images/routs/'+data.routId+'/'+data.name+'_view.jpg">'+
 				'<img class="img-thumbnail" src="/images/routs/'+data.routId+'/'+data.name+'_small.jpg" alt="" data-prop="'+(null !== data.previewProp ? data.previewProp : '')+'">'+
 				'<i class="fa fa-pencil fa-2x"></i>'+
 			'</a>'+
