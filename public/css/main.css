@@ -665,5 +665,10 @@
 
 .table-listing .success .del,
 .table-listing .del:hover {
-	color: #d9230f
+	color: #d9230f;
+}
+
+.table-listing .success .fa-shopping-cart,
+.table-listing .fa-shopping-cart:hover {
+	color: #cd85d1;
 }

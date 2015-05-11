@@ -4,7 +4,7 @@ $(document).ready(function() {
 			tr = $(this).closest('tr');
 		$('#car-edit form')[0].reset();
 		$('#car-edit input[type="checkbox"]').attr("checked", false);
-		removeErrors('#guide-edit form');
+		removeErrors('#car-edit form');
 		$('#car-edit .modal-title').text(isNew ? 'Новый транспорт' : 'Редактирование транспорта');
 		
 		$('#name-input').val(isNew ? '' : tr.find('.name').text());
@@ -49,7 +49,6 @@ $(document).ready(function() {
 			url: "/cars/activate/id/"+$(this).closest('tr').data('id'),
 			type: "POST",
 			async: true,
-			cache: false,
 			success: refreshTable
 		});
 	});

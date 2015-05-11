@@ -6224,3 +6224,99 @@ REQUEST_URI=/cars
 in /var/www/new-tours/protected/views/cars/layouts/list.php (11)
 in /var/www/new-tours/protected/views/cars/index.php (9)
 in /var/www/new-tours/protected/controllers/CarsController.php (27)
+2015/05/08 15:47:58 [error] [php] Undefined variable: regions (/var/www/new-tours/protected/views/clients/index.php:79)
+Stack trace:
+#0 /var/www/new-tours/framework/web/CController.php(869): ClientsController->renderFile()
+#1 /var/www/new-tours/framework/web/CController.php(782): ClientsController->renderPartial()
+#2 /var/www/new-tours/protected/controllers/ClientsController.php(26): ClientsController->render()
+#3 /var/www/new-tours/framework/web/actions/CInlineAction.php(49): ClientsController->actionIndex()
+#4 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): ClientsController->runAction()
+#6 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/new-tours/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#8 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): ClientsController->filterAccessControl()
+#9 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#10 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/new-tours/framework/web/CController.php(265): ClientsController->runActionWithFilters()
+#12 /var/www/new-tours/framework/web/CWebApplication.php(282): ClientsController->run()
+#13 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#14 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/new-tours/public/index.php(13): CWebApplication->run()
+REQUEST_URI=/clients
+in /var/www/new-tours/protected/views/clients/index.php (79)
+in /var/www/new-tours/protected/controllers/ClientsController.php (26)
+in /var/www/new-tours/public/index.php (13)
+2015/05/08 15:47:59 [error] [php] Undefined variable: regions (/var/www/new-tours/protected/views/clients/index.php:79)
+Stack trace:
+#0 /var/www/new-tours/framework/web/CController.php(869): ClientsController->renderFile()
+#1 /var/www/new-tours/framework/web/CController.php(782): ClientsController->renderPartial()
+#2 /var/www/new-tours/protected/controllers/ClientsController.php(26): ClientsController->render()
+#3 /var/www/new-tours/framework/web/actions/CInlineAction.php(49): ClientsController->actionIndex()
+#4 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): ClientsController->runAction()
+#6 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/new-tours/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#8 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): ClientsController->filterAccessControl()
+#9 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#10 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/new-tours/framework/web/CController.php(265): ClientsController->runActionWithFilters()
+#12 /var/www/new-tours/framework/web/CWebApplication.php(282): ClientsController->run()
+#13 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#14 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /var/www/new-tours/public/index.php(13): CWebApplication->run()
+REQUEST_URI=/clients
+in /var/www/new-tours/protected/views/clients/index.php (79)
+in /var/www/new-tours/protected/controllers/ClientsController.php (26)
+in /var/www/new-tours/public/index.php (13)
+2015/05/08 15:48:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "js/app/clients.js".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('js/app/clients....')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/app/clients.js
+HTTP_REFERER=http://new-tours/clients
+---
+2015/05/08 16:03:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "client/activate/id/1".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('client/activate...')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/client/activate/id/1
+HTTP_REFERER=http://new-tours/clients
+---
+2015/05/08 16:03:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "client/activate/id/1".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('client/activate...')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/client/activate/id/1
+HTTP_REFERER=http://new-tours/clients
+---
+2015/05/11 09:28:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "favicon.ico".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/05/11 09:28:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "favicon.ico".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/05/11 10:00:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "orders/index/client/1".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('orders/index/cl...')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/orders/index/client/1
+HTTP_REFERER=http://new-tours/clients
+---
