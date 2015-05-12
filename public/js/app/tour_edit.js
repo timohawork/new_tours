@@ -3,21 +3,10 @@ $(document).ready(function() {
 	$("#start-date").datepicker({
 		dateFormat: "yy-mm-dd",
 		defaultDate: "+1w",
-		changeMonth: true,
-		onClose: function(selectedDate) {
-			$("#finish-date").datepicker("option", "minDate", selectedDate);
-		}
+		changeMonth: true
     });
-    $("#finish-date").datepicker({
-		dateFormat: "yy-mm-dd",
-		defaultDate: "+1w",
-		changeMonth: true,
-		onClose: function(selectedDate) {
-			$("#start-date").datepicker("option", "maxDate", selectedDate);
-		}
-    });
-	
-	$('#start-time').live('change', function() {
+    
+	$('#start-date, #start-time').live('change', function() {
 		var routId = $('#rout-id').val();
 		if (!routId) {
 			return true;
@@ -27,9 +16,11 @@ $(document).ready(function() {
 			type: "POST",
 			data: {
 				id: routId,
-				startTime: $(this).val()
+				startDate: $('#start-date').val(),
+				startTime: $('#start-time').val()
 			},
 			success: function(response) {
+				$('#finish-date').val(response.date);
 				$('#finish-time').val(response.time);
 			}
 		});
@@ -68,9 +59,7 @@ $(document).ready(function() {
 	function addPhoto(data)
 	{
 		$('#images-block .photos').prepend('<div class="photo">' +
-			'<a class="preview-image" href="#" data-url="/images/routs/'+data.routId+'/'+data.name+'_view.jpg">'+
-				'<img class="img-thumbnail" src="/images/routs/' + data.routId + '/' + data.name + '_small.jpg" alt="">' +
-			'</a>'+
+			'<img class="img-rounded" src="/images/routs/' + data.routId + '/' + data.name + '_small.jpg" alt="">' +
 		'</div>');
 	}
 });

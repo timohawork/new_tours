@@ -25,7 +25,8 @@ class Points extends ApModel
             'parent' => array(self::BELONGS_TO, 'Points', 'parentId'),
             'points' => array(self::HAS_MANY, 'Points', 'parentId'),
             'routs' => array(self::MANY_MANY, 'Routs', 'rout_points(pointId, routId)'),
-			'images' => array(self::HAS_MANY, 'PointPhotos', 'pointId')
+			'images' => array(self::HAS_MANY, 'PointPhotos', 'pointId'),
+			'regions' => array(self::MANY_MANY, 'Regions', 'point_regions(pointId, regionId)')
         );
 	}
 
@@ -53,5 +54,17 @@ class Points extends ApModel
 			$this->uid = md5(date("Y-m-d H:i:s").rand(1000, 10000));
 		}
 		parent::save($runValidation, $attributes);
+	}
+	
+	public static function getPoints($params = array())
+	{
+		if (!empty($params['regionId'])) {
+			$pointsIds = PointRegions::model()->findAllByAttributes(array('regionId' => $params['regionId']));
+			if (!empty($pointsIds)) {
+				return self::model()->findAll("id IN (".(implode(', ', ArrayHelper::columnValues($pointsIds, 'pointId'))).")");
+			}
+			return array();
+		}
+		return self::model()->findAll();
 	}
 }

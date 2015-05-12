@@ -11,18 +11,17 @@ class PointsController extends ApController
 	}
 	
 	public function actionIndex() {
-		$points = Points::model()->findAll();
-		
 		if (Yii::app()->request->isAjaxRequest) {
 			$this->jsonEcho(array('html' => $this->renderPartial('layouts/list', array(
-				'points' => $points
+				'points' => Points::getPoints($_POST)
 			), true)));
 		}
 		
 		Yii::app()->getClientScript()
 			->registerScriptFile('/js/app/points.js');
 		$this->render('index', array(
-			'points' => $points
+			'points' => Points::getPoints(),
+			'regions' => Regions::model()->findAll('parentId IS NULL')
 		));
 	}
 	
@@ -49,13 +48,25 @@ class PointsController extends ApController
 			$model->maxCount = $_POST['maxCount'];
 			
 			$model->save();
+			
+			PointRegions::model()->deleteAllByAttributes(array('pointId' => $model->id));
+			if (!empty($_POST['regions'])) {
+				foreach ($_POST['regions'] as $id) {
+					$relationModel = new PointRegions();
+					$relationModel->pointId = $model->id;
+					$relationModel->regionId = $id;
+					$relationModel->save();
+				}
+			}
+			
 			$this->redirect('/points');
 		}
 		
 		Yii::app()->getClientScript()
 			->registerScriptFile('/js/app/point_edit.js');
 		$this->render('edit', array(
-			'model' => $model
+			'model' => $model,
+			'regions' => Regions::model()->findAll('parentId IS NULL')
 		));
 	}
 	
@@ -71,5 +82,20 @@ class PointsController extends ApController
 			Yii::app()->end();
 		}
 		$model->delete();
+	}
+	
+	public function actionGet_Points()
+	{
+		if (empty($_POST['regions'])) {
+			$this->jsonEcho(array('points' => array()));
+		}
+		$response = array();
+		foreach (Points::getPoints(array('regionId' => $_POST['regions'])) as $point) {
+			$response[] = array(
+				'id' => $point->id,
+				'title' => $point->title
+			);
+		}
+		$this->jsonEcho(array('points' => $response));
 	}
 }

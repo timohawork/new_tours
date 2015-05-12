@@ -11,18 +11,17 @@ class ToursController extends ApController
 	}
 	
 	public function actionIndex() {
-		$tours = Tours::model()->findAll();
-		
 		if (Yii::app()->request->isAjaxRequest) {
 			$this->jsonEcho(array('html' => $this->renderPartial('layouts/list', array(
-				'tours' => $tours
+				'tours' => Tours::model()->findAll(!empty($_POST['regionId']) ? 'regionId = '.$_POST['regionId'] : '')
 			), true)));
 		}
 		
 		Yii::app()->getClientScript()
 			->registerScriptFile('/js/app/tours.js');
 		$this->render('index', array(
-			'tours' => $tours
+			'tours' => Tours::model()->findAll(),
+			'regions' => Regions::model()->findAll('parentId IS NULL')
 		));
 	}
 	
@@ -36,14 +35,15 @@ class ToursController extends ApController
 		
 		if (Yii::app()->request->isPostRequest) {
 			$model->routId = $_POST['routId'];
+			$model->regionId = $_POST['regionId'];
 			$model->title = ArrayHelper::val($_POST, 'title', $model->rout->title);
 			$model->description = $_POST['description'];
 			$model->type = $_POST['type'];
 			$model->totalPass = $_POST['totalPass'];
 			$model->childPass = $_POST['childPass'];
 			$model->invalidPass = $_POST['invalidPass'];
-			$model->startDate = $_POST['startDate'];
-			$model->finishDate = $_POST['finishDate'];
+			$model->startDate = $_POST['startDate'].' '.$_POST['startTime'].':00';
+			$model->finishDate = $model->rout->getFinishDate($model->startDate, true);
 			$model->isAction = !empty($_POST['isAction']) ? 1 : 0;
 			
 			$model->guideId = $_POST['guideId'];
@@ -64,7 +64,8 @@ class ToursController extends ApController
 			'model' => $model,
 			'routs' => Routs::model()->findAll(),
 			'cars' => Cars::model()->findAll(),
-			'guides' => Guides::model()->findAll()
+			'guides' => Guides::model()->findAll(),
+			'regions' => Regions::model()->findAll('parentId IS NULL')
 		));
 	}
 	
@@ -84,6 +85,23 @@ class ToursController extends ApController
 	
 	public function actionTime_Diff()
 	{
-		$this->jsonEcho(array('time' => $_POST['startTime']));
+		if (
+			empty($_POST['startDate']) || 
+			empty($_POST['startTime']) || 
+			empty($_POST['id']) || 
+			null === ($model = Routs::model()->findByPk($_POST['id']))
+		) {
+			$this->jsonEcho(array(
+				'date' => '',
+				'time' => '00:00'
+			));
+		}
+		
+		$finish = $model->getFinishDate($_POST['startDate'].' '.$_POST['startTime'].':00');
+		
+		$this->jsonEcho(array(
+			'date' => $finish['date'],
+			'time' => $finish['time']
+		));
 	}
 }

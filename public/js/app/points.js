@@ -25,16 +25,21 @@ $(document).ready(function() {
 		});
 		return false;
 	});
+	
+	$('#filter-region').live('change', refreshTable);
 });
 
 function refreshTable() {
 	$.ajax({
 		url: "/points",
 		type: "POST",
+		data: {
+			regionId: $('#filter-region').val()
+		},
 		async: true,
 		cache: false,
 		success: function(response) {
-			$('.ap-blocks-list').html(response.html);
+			$('#points_list').html(response.html);
 			refreshImg();
 		}
 	});

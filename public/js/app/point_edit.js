@@ -34,19 +34,18 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	$('.preview-image .fa-pencil').live('click', function() {
+	$('.photo').live('click', function() {
 		var self = $(this),
-			img = $(this).prev(),
+			img = $(this).find('img'),
 			prop = img.attr('data-prop');
 		if (!undef(prop) && prop.length) {
 			prop = prop.split('x');
 		}
-		imageEditor.init($('#title').val(), img.attr('src').replace('_small', '_view'), self.closest('.photo').attr('data-id'), 'points', prop, function() {
-			$('#point-photo-id-image').val(self.closest('.photo').attr('data-id'));
+		imageEditor.init($('#title').val(), img.attr('src').replace('_small', '_view'), self.attr('data-id'), 'points', prop, function() {
+			$('#point-photo-id-image').val(self.attr('data-id'));
 			$('#point-image-file').trigger('click');
 		}, function() {
-			var block = self.closest('.photo');
-			block.remove();
+			self.remove();
 			var count = $('#point-edit .photos .photo:not(.add)').length;
 			if (3 > count && !$('#point-edit .photo.add').length) {
 				$('#point-edit .photos').append('<div class="photo add"><i class="fa fa-plus fa-2x"></i></div>');
@@ -72,10 +71,7 @@ $(document).ready(function() {
 	function addPhoto(data)
 	{
 		$('#images-block .photos').prepend('<div class="photo" data-id="'+data.id+'">'+
-			'<a class="preview-image" data-url="/images/points/'+data.pointId+'/'+data.name+'_view.jpg">'+
-				'<img class="img-thumbnail" src="/images/points/'+data.pointId+'/'+data.name+'_small.jpg" alt="" data-prop="'+(null !== data.previewProp ? data.previewProp : '')+'">'+
-				'<i class="fa fa-pencil fa-2x"></i>'+
-			'</a>'+
+			'<img class="img-rounded" src="/images/points/'+data.pointId+'/'+data.name+'_small.jpg" alt="" data-prop="'+(null !== data.previewProp ? data.previewProp : '')+'">'+
 		'</div>');
 		if (3 == $('.photos .photo:not(.add)').length) {
 			$('.photo.add').remove();

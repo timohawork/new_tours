@@ -6,6 +6,7 @@
 		<ul class="nav nav-tabs" style="margin-bottom: 15px;">
 			<li class="active"><a href="#main" data-toggle="tab">Основная</a></li>
 			<li><a href="#serice" data-toggle="tab">Сервисная</a></li>
+			<li><a href="#regions" data-toggle="tab">Регионы</a></li>
 		</ul>
 		<form class="form-horizontal" role="form" action="" method="POST">
 			<div class="tab-content">
@@ -36,10 +37,7 @@
 									<div class="photos">
 										<?php foreach ($model->images as $image) : ?>
 											<div class="photo" data-id="<?=$image->id?>">
-												<a class="preview-image" data-url="<?=$image->getUrl('view')?>">
-													<img class="img-thumbnail" src="<?=$image->getUrl()?>" alt="" data-prop="<?=$image->previewProp?>">
-													<i class="fa fa-pencil fa-2x"></i>
-												</a>
+												<img class="img-rounded" src="<?=$image->getUrl()?>" alt="" data-prop="<?=$image->previewProp?>">
 											</div>
 										<?php endforeach; ?>
 										<?php if (count($model->images) < 3) : ?>
@@ -62,10 +60,6 @@
 						<div class="col-sm-offset-3 col-sm-9">
 							<div id="map-marker"></div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-3 control-label">Дополнительные объекты</label>
-						<div class="col-sm-9"></div>
 					</div>
 					<div class="form-group">
 						<label for="rating" class="col-sm-3 control-label">Рейтинг настоящий</label>
@@ -124,9 +118,22 @@
 						</div>
 					</div>
 				</div>
+				<div class="tab-pane fade" id="regions">
+					<?php $regionsIds = ArrayHelper::columnValues($model->regions, 'id'); ?>
+					<?php foreach ($regions as $region) : ?>
+						<div class="checkbox">
+							<label><input type="checkbox" name="regions[]" value="<?=$region->id?>"<?=in_array($region->id, $regionsIds) ? ' checked' : ''?>> <?=$region->title?></label>
+						</div>
+						<?php foreach($region->regions as $child) : ?>
+							<div class="checkbox child">
+								<label><input type="checkbox" name="regions[]" value="<?=$child->id?>"<?=in_array($child->id, $regionsIds) ? ' checked' : ''?>> <?=$child->title?></label>
+							</div>
+						<?php endforeach; ?>
+					<?php endforeach; ?>
+				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-offset-3 col-sm-9">
+				<div class="col-sm-12 form-buttons">
 					<button type="button" class="btn btn-default">Отмена</button>
 					<button type="submit" class="btn btn-primary">Сохранить</button>
 				</div>

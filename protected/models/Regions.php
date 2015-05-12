@@ -18,7 +18,10 @@ class Regions extends ApModel
 	public function relations() {
 		return array(
 			'parent' => array(self::BELONGS_TO, 'Regions', 'parentId'),
-			'regions' => array(self::HAS_MANY, 'Regions', 'parentId')
+			'regions' => array(self::HAS_MANY, 'Regions', 'parentId'),
+			'points' => array(self::MANY_MANY, 'Points', 'point_regions(regionId, pointId)'),
+			'routs' => array(self::MANY_MANY, 'Routs', 'rout_regions(regionId, routId)'),
+			'tours' => array(self::HAS_MANY, 'Tours', 'regionId')
 		);
 	}
 

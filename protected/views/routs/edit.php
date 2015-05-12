@@ -5,6 +5,7 @@
 	<div class="panel-body">
 		<ul class="nav nav-tabs" style="margin-bottom: 15px;">
 			<li class="active"><a href="#main" data-toggle="tab">Основная</a></li>
+			<li><a href="#regions" data-toggle="tab">Регионы</a></li>
 			<li><a href="#points" data-toggle="tab">Объекты</a></li>
 		</ul>
 		<form class="form-horizontal" role="form" action="" method="POST">
@@ -30,10 +31,7 @@
 									<div class="photos">
 										<?php foreach ($model->images as $image) : ?>
 											<div class="photo" data-id="<?=$image->id?>">
-												<a class="preview-image" data-url="<?=$image->getUrl('view')?>">
-													<img class="img-thumbnail" src="<?=$image->getUrl()?>" alt="" data-prop="<?=$image->previewProp?>">
-													<i class="fa fa-pencil fa-2x"></i>
-												</a>
+												<img class="img-rounded" src="<?=$image->getUrl()?>" alt="" data-prop="<?=$image->previewProp?>">
 											</div>
 										<?php endforeach; ?>
 										<?php if (count($model->images) < 3) : ?>
@@ -82,7 +80,7 @@
 					<div class="form-group" data-type="required">
 						<label class="col-sm-2 control-label">Обязательные</label>
 						<div class="col-sm-10 for-points-list">
-							<select name="" class="form-control">
+							<select id="required-points" name="" class="form-control">
 								<option value=""></option>
 								<?php foreach ($points as $point) : ?>
 									<option value="<?=$point->id?>"><?=$point->title?></option>
@@ -108,7 +106,7 @@
 					<div class="form-group" data-type="additional">
 						<label class="col-sm-2 control-label">Дополнительные</label>
 						<div class="col-sm-10 for-points-list">
-							<select name="" class="form-control">
+							<select id="additional-points" name="" class="form-control">
 								<option value=""></option>
 								<?php foreach ($points as $point) : ?>
 									<option value="<?=$point->id?>"><?=$point->title?></option>
@@ -132,9 +130,22 @@
 						</div>
 					</div>
 				</div>
+				<div class="tab-pane fade" id="regions">
+					<?php $regionsIds = ArrayHelper::columnValues($model->regions, 'id'); ?>
+					<?php foreach ($regions as $region) : ?>
+						<div class="checkbox">
+							<label><input type="checkbox" name="regions[]" value="<?=$region->id?>"<?=in_array($region->id, $regionsIds) ? ' checked' : ''?>> <?=$region->title?></label>
+						</div>
+						<?php foreach($region->regions as $child) : ?>
+							<div class="checkbox child">
+								<label><input type="checkbox" name="regions[]" value="<?=$child->id?>"<?=in_array($child->id, $regionsIds) ? ' checked' : ''?>> <?=$child->title?></label>
+							</div>
+						<?php endforeach; ?>
+					<?php endforeach; ?>
+				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-8">
+				<div class="col-sm-12 form-buttons">
 					<button type="button" class="btn btn-default">Отмена</button>
 					<button type="submit" class="btn btn-primary">Сохранить</button>
 				</div>

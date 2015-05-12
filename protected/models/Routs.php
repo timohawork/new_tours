@@ -19,7 +19,8 @@ class Routs extends ApModel
 		return array(
             'points' => array(self::HAS_MANY, 'RoutPoints', 'routId'),
             'tours' => array(self::HAS_MANY, 'Tours', 'routId'),
-			'images' => array(self::HAS_MANY, 'RoutPhotos', 'routId')
+			'images' => array(self::HAS_MANY, 'RoutPhotos', 'routId'),
+			'regions' => array(self::MANY_MANY, 'Regions', 'rout_regions(routId, regionId)')
         );
 	}
 
@@ -52,5 +53,33 @@ class Routs extends ApModel
 				return $point->point;
 			}
 		}
+	}
+	
+	public static function getRouts($params = array())
+	{
+		if (!empty($params['regionId'])) {
+			$routsIds = RoutRegions::model()->findAllByAttributes(array('regionId' => $params['regionId']));
+			if (!empty($routsIds)) {
+				return self::model()->findAll("id IN (".(implode(', ', ArrayHelper::columnValues($routsIds, 'routId'))).")");
+			}
+			return array();
+		}
+		return self::model()->findAll();
+	}
+	
+	public function getFinishDate($startDate, $toString = false)
+	{
+		$date = strtotime($startDate);
+		foreach ($this->points as $point) {
+			if (!empty($point->time)) {
+				$time = explode(":", $point->time);
+				$date += $time[0]*60*60 + $time[1]*60;
+			}
+		}
+		
+		return $toString ? date("Y-m-d H:i:s", $date) : array(
+			'date' => date("Y-m-d", $date),
+			'time' => date("H:i", $date)
+		);
 	}
 }

@@ -35,6 +35,20 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label for="region-id" class="col-sm-3 control-label">Регион</label>
+						<div class="col-sm-9">
+							<select id="region-id" name="regionId" class="form-control">
+								<option value="">Не выбран</option>
+								<?php foreach ($regions as $region) : ?>
+									<option class="parent" value="<?=$region->id?>"<?=$model->regionId == $region->id ? ' selected' : ''?>><?=$region->title?></option>
+									<?php foreach($region->regions as $child) : ?>
+										<option value="<?=$child->id?>"<?=$model->regionId == $region->id ? ' selected' : ''?>>&mdash; <?=$child->title?></option>
+									<?php endforeach; ?>
+								<?php endforeach; ?>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
 						<label class="col-sm-3 control-label">Фотографии</label>
 						<div id="images-block" class="col-sm-9">
 							<div class="photos-group">
@@ -42,9 +56,7 @@
 									<?php if (!empty($model->routId)) : ?>
 										<?php foreach ($model->rout->images as $image) : ?>
 											<div class="photo" data-id="<?=$image->id?>">
-												<a class="preview-image" href="#" data-url="<?=$image->getUrl('view')?>">
-													<img class="img-thumbnail" src="<?=$image->getUrl()?>" alt="">
-												</a>
+												<img class="img-rounded" src="<?=$image->getUrl()?>" alt="">
 											</div>
 										<?php endforeach; ?>
 									<?php endif; ?>
@@ -93,16 +105,16 @@
 							<input id="start-date" type="text" name="startDate" data-validate="required:1" class="form-control" value="<?=DateHelper::getDate($model->startDate)?>">
 						</div>
 						<div class="col-sm-2">
-							<input id="start-time" type="text" name="startTime" data-validate="required:1" class="form-control timepicker" value="00:00">
+							<input id="start-time" type="text" name="startTime" class="form-control timepicker" value="<?=DateHelper::getTime($model->startDate)?>">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="date-end" class="col-sm-3 control-label">Дата и время конца</label>
 						<div class="col-sm-2">
-							<input id="finish-date" type="text" name="finishDate" data-validate="required:1" class="form-control" value="<?=DateHelper::getDate($model->finishDate)?>">
+							<input id="finish-date" type="text" name="finishDate" class="form-control" value="<?=DateHelper::getDate($model->finishDate)?>" disabled>
 						</div>
 						<div class="col-sm-2">
-							<input id="finish-time" type="text" name="finishTime" class="form-control timepicker" value="00:00" disabled>
+							<input id="finish-time" type="text" name="finishTime" class="form-control timepicker" value="<?=DateHelper::getTime($model->finishDate)?>" disabled>
 						</div>
 					</div>
 					<div class="form-group">
@@ -165,7 +177,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-offset-3 col-sm-9">
+				<div class="col-sm-12 form-buttons">
 					<button type="button" class="btn btn-default">Отмена</button>
 					<button type="submit" class="btn btn-primary">Сохранить</button>
 				</div>

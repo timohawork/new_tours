@@ -33,6 +33,28 @@ $(document).ready(function() {
 		}
 	});
 	
+	$('#regions input').live('change', function() {
+		var regions = [];
+		$('#regions input:checked').each(function() {
+			regions.push($(this).attr('value'));
+		});
+		$.ajax({
+			url: "/points/get_points",
+			type: "POST",
+			data: {regions: regions},
+			success: function(response) {
+				$('.rout-points-list tbody').empty();
+				$('#start-point, #end-point, #required-points, #additional-points').empty().each(function() {
+					var self = $(this);
+					self.append('<option value="">'+(self.attr('id') === 'start-point' || self.attr('id') === 'end-point' ? 'Не выбрано' : '')+'</option>');
+					$.each(response.points, function(key, point) {
+						self.append('<option value="'+point.id+'">'+point.title+'</option>');
+					});
+				});
+			}
+		});
+	});
+	
 	$('.photo.add').live('click', function() {
 		$('#rout-photo-id-image').val('');
 		$('#rout-image-file').trigger('click');
@@ -66,19 +88,18 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	$('.preview-image .fa-pencil').live('click', function() {
+	$('.photo').live('click', function() {
 		var self = $(this),
-			img = $(this).prev(),
+			img = $(this).find('img'),
 			prop = img.attr('data-prop');
 		if (!undef(prop) && prop.length) {
 			prop = prop.split('x');
 		}
-		imageEditor.init($('#title').val(), img.attr('src').replace('_small', '_view'), self.closest('.photo').attr('data-id'), 'routs', prop, function() {
-			$('#rout-photo-id-image').val(self.closest('.photo').attr('data-id'));
+		imageEditor.init($('#title').val(), img.attr('src').replace('_small', '_view'), self.attr('data-id'), 'routs', prop, function() {
+			$('#rout-photo-id-image').val(self.attr('data-id'));
 			$('#rout-image-file').trigger('click');
 		}, function() {
-			var block = self.closest('.photo');
-			block.remove();
+			self.remove();
 			var count = $('#rout-edit .photos .photo:not(.add)').length;
 			if (3 > count && !$('#rout-edit .photo.add').length) {
 				$('#rout-edit .photos').append('<div class="photo add"><i class="fa fa-plus fa-2x"></i></div>');
@@ -92,10 +113,7 @@ $(document).ready(function() {
 	function addPhoto(data)
 	{
 		$('#images-block .photos').prepend('<div class="photo" data-id="'+data.id+'">'+
-			'<a class="preview-image" href="#" data-url="/images/routs/'+data.routId+'/'+data.name+'_view.jpg">'+
-				'<img class="img-thumbnail" src="/images/routs/'+data.routId+'/'+data.name+'_small.jpg" alt="" data-prop="'+(null !== data.previewProp ? data.previewProp : '')+'">'+
-				'<i class="fa fa-pencil fa-2x"></i>'+
-			'</a>'+
+			'<img class="img-rounded" src="/images/routs/'+data.routId+'/'+data.name+'_small.jpg" alt="" data-prop="'+(null !== data.previewProp ? data.previewProp : '')+'">'+
 		'</div>');
 		if (3 == $('.photos .photo:not(.add)').length) {
 			$('.photo.add').remove();

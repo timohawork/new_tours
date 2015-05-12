@@ -4,8 +4,21 @@
 		<i id="add-new" class="fa fa-plus fa-2x"></i>
 	</div>
 	<div class="panel-body">
-		<?php $this->renderPartial('layouts/list', array(
-			'tours' => $tours
-		)); ?>
+		<div class="list-filter">
+			<select id="filter-region" name="regionId" class="form-control">
+				<option value="">Выберите регион</option>
+				<?php foreach ($regions as $region) : ?>
+					<option class="parent" value="<?=$region->id?>"><?=$region->title?></option>
+					<?php foreach($region->regions as $child) : ?>
+						<option value="<?=$child->id?>">&mdash; <?=$child->title?></option>
+					<?php endforeach; ?>
+				<?php endforeach; ?>
+			</select>
+		</div>
+		<div id="tours_list">
+			<?php $this->renderPartial('layouts/list', array(
+				'tours' => $tours
+			)); ?>
+		</div>
 	</div>
 </div>

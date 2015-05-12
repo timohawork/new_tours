@@ -11,18 +11,17 @@ class RoutsController extends ApController
 	}
 	
 	public function actionIndex() {
-		$routs = Routs::model()->findAll();
-		
 		if (Yii::app()->request->isAjaxRequest) {
 			$this->jsonEcho(array('html' => $this->renderPartial('layouts/list', array(
-				'routs' => $routs
+				'routs' => Routs::getRouts($_POST)
 			), true)));
 		}
 		
 		Yii::app()->getClientScript()
 			->registerScriptFile('/js/app/routs.js');
 		$this->render('index', array(
-			'routs' => $routs
+			'routs' => Routs::getRouts(),
+			'regions' => Regions::model()->findAll('parentId IS NULL')
 		));
 	}
 	
@@ -82,6 +81,15 @@ class RoutsController extends ApController
 					$model->save();
 					$startPoint->save();
 					$endPoint->save();
+					RoutRegions::model()->deleteAllByAttributes(array('routId' => $model->id));
+					if (!empty($_POST['regions'])) {
+						foreach ($_POST['regions'] as $id) {
+							$relationModel = new RoutRegions();
+							$relationModel->routId = $model->id;
+							$relationModel->regionId = $id;
+							$relationModel->save();
+						}
+					}
 					$this->redirect('/routs');
 				}
 				else {
@@ -118,12 +126,20 @@ class RoutsController extends ApController
 			}
 		}
 		
+		if (!$model->isNewRecord) {
+			$regionPoints = Points::getPoints(array('regionId' => ArrayHelper::columnValues($model->regions, 'id')));
+		}
+		else {
+			$regionPoints = array();
+		}
+		
 		Yii::app()->getClientScript()
 			->registerScriptFile('/js/app/rout_edit.js');
 		$this->render('edit', array(
 			'model' => $model,
-			'points' => Points::model()->findAll(),
-			'routPoints' => $points
+			'points' => $regionPoints,
+			'routPoints' => $points,
+			'regions' => Regions::model()->findAll('parentId IS NULL')
 		));
 	}
 	

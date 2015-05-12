@@ -9,6 +9,7 @@
  * @property string $title
  * @property string $description
  * @property integer $routId
+ * @property integer $regionId
  * @property integer $type
  * @property integer $totalPass
  * @property integer $childPass
@@ -49,7 +50,7 @@ class Tours extends ApModel
 	{
 		return array(
 			array('uid, routId, type', 'required'),
-			array('routId, type, totalPass, childPass, invalidPass, carId, guideId, isAction, active', 'numerical', 'integerOnly' => true),
+			array('routId, regionId, type, totalPass, childPass, invalidPass, carId, guideId, isAction, active', 'numerical', 'integerOnly' => true),
 			array('uid', 'length', 'max' => 32),
 			array('title', 'length', 'max' => 128),
 			array('carCost, guideCost, expenses, margin', 'length', 'max' => 100),
@@ -63,6 +64,8 @@ class Tours extends ApModel
 	public function relations()
 	{
 		return array(
+			'orders' => array(self::HAS_MANY, 'Orders', 'tourId'),
+			'region' => array(self::BELONGS_TO, 'Regions', 'regionId'),
 			'guide' => array(self::BELONGS_TO, 'Guides', 'guideId'),
 			'car' => array(self::BELONGS_TO, 'Cars', 'carId'),
 			'rout' => array(self::BELONGS_TO, 'Routs', 'routId'),
@@ -80,6 +83,7 @@ class Tours extends ApModel
 			'title' => 'Title',
 			'description' => 'Description',
 			'routId' => 'Rout',
+			'regionId' => 'Region',
 			'type' => 'Type',
 			'totalPass' => 'Total Pass',
 			'childPass' => 'Child Pass',
