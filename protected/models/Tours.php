@@ -16,8 +16,6 @@
  * @property integer $invalidPass
  * @property string $startDate
  * @property string $finishDate
- * @property integer $carId
- * @property integer $guideId
  * @property string $carCost
  * @property string $guideCost
  * @property string $expenses
@@ -26,8 +24,6 @@
  * @property integer $active
  *
  * The followings are the available model relations:
- * @property Guides $guide
- * @property Cars $car
  * @property Routs $rout
  */
 class Tours extends ApModel
@@ -50,7 +46,7 @@ class Tours extends ApModel
 	{
 		return array(
 			array('uid, routId, type', 'required'),
-			array('routId, regionId, type, totalPass, childPass, invalidPass, carId, guideId, isAction, active', 'numerical', 'integerOnly' => true),
+			array('routId, regionId, type, totalPass, childPass, invalidPass, isAction, active', 'numerical', 'integerOnly' => true),
 			array('uid', 'length', 'max' => 32),
 			array('title', 'length', 'max' => 128),
 			array('carCost, guideCost, expenses, margin', 'length', 'max' => 100),
@@ -64,11 +60,10 @@ class Tours extends ApModel
 	public function relations()
 	{
 		return array(
-			'orders' => array(self::HAS_MANY, 'Orders', 'tourId'),
+			'orders' => array(self::HAS_MANY, 'Orders', 'tourId', 'condition' => 'isPlaced = 0'),
 			'region' => array(self::BELONGS_TO, 'Regions', 'regionId'),
-			'guide' => array(self::BELONGS_TO, 'Guides', 'guideId'),
-			'car' => array(self::BELONGS_TO, 'Cars', 'carId'),
 			'rout' => array(self::BELONGS_TO, 'Routs', 'routId'),
+			'toursOrders' => array(self::HAS_MANY, 'ToursOrders', 'tourId')
 		);
 	}
 
@@ -90,8 +85,6 @@ class Tours extends ApModel
 			'invalidPass' => 'Invalid Pass',
 			'startDate' => 'Start Date',
 			'finishDate' => 'Finish Date',
-			'carId' => 'Car',
-			'guideId' => 'Guide',
 			'carCost' => 'Car Cost',
 			'guideCost' => 'Guide Cost',
 			'expenses' => 'Expenses',
@@ -117,5 +110,25 @@ class Tours extends ApModel
 			$this->uid = md5(date("Y-m-d H:i:s").rand(1000, 10000));
 		}
 		parent::save($runValidation, $attributes);
+	}
+	
+	public static function getDayCounters($date)
+	{
+		$counters = array(
+			'tours' => 0,
+			'placed' => 0,
+			'notPlaced' => 0
+		);
+		foreach (self::model()->findAll('startDate >= :start AND startDate <= :end AND active = 1', array(
+			':start' => $date.' 00:00:00',
+			':end' => $date.' 23:59:59'
+		)) as $tour) {
+			$counters['tours']++;
+			$counters['notPlaced'] += Orders::passSummCount($tour->orders);
+			foreach ($tour->toursOrders as $order) {
+				$counters['placed'] += Orders::passSummCount($order->orders);
+			}
+		}
+		return $counters;
 	}
 }

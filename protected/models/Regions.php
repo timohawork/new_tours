@@ -37,14 +37,27 @@ class Regions extends ApModel
 		);
 	}
 
-	public static function model($className=__CLASS__) {
+	public static function model($className = __CLASS__) {
 		return parent::model($className);
 	}
 	
-	public function save($runValidation = true, $attributes = null) {
+	public function save($runValidation = true, $attributes = null)
+	{
 		if ($this->isNewRecord) {
 			$this->uid = md5(date("Y-m-d H:i:s").rand(1000, 10000));
 		}
 		parent::save($runValidation, $attributes);
+	}
+	
+	public function getTours($date = null)
+	{
+		if ($date === null) {
+			$date = date("Y-m-d");
+		}
+		return Tours::model()->findAll('regionId = :region AND startDate >= :start AND startDate <= :end', array(
+			':region' => $this->id,
+			':start' => $date.' 00:00:00',
+			':end' => $date.' 23:59:59'
+		));
 	}
 }

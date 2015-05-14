@@ -5,7 +5,6 @@
 	<div class="panel-body">
 		<ul class="nav nav-tabs" style="margin-bottom: 15px;">
 			<li class="active"><a href="#main" data-toggle="tab">Основная</a></li>
-			<li><a href="#serice" data-toggle="tab">Сервисная</a></li>
 			<li><a href="#report" data-toggle="tab">Отчётная</a></li>
 		</ul>
 		<form class="form-horizontal" role="form" action="" method="POST">
@@ -122,30 +121,6 @@
 							<div class="checkbox">
 								<label><input name="isAction" type="checkbox"<?=$model->isAction ? ' checked' : ''?>> акционная</label>
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class="tab-pane fade" id="serice">
-					<div class="form-group">
-						<label for="guide-id" class="col-sm-3 control-label">Гид</label>
-						<div class="col-sm-9">
-							<select id="guide-id" name="guideId" class="form-control" data-validate="required:1">
-								<option value="">Не выбран</option>
-								<?php foreach ($guides as $guide) : ?>
-									<option value="<?=$guide->id?>"<?=$model->guideId == $guide->id ? ' selected' : ''?>><?=$guide->name?></option>
-								<?php endforeach; ?>
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="car-id" class="col-sm-3 control-label">Транспорт</label>
-						<div class="col-sm-9">
-							<select id="car-id" name="carId" class="form-control" data-validate="required:1">
-								<option value="">Не выбран</option>
-								<?php foreach ($cars as $car) : ?>
-									<option value="<?=$car->id?>"<?=$model->carId == $car->id ? ' selected' : ''?>><?=$car->name?></option>
-								<?php endforeach; ?>
-							</select>
 						</div>
 					</div>
 				</div>

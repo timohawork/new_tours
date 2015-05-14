@@ -10,6 +10,9 @@
  */
 class Users extends ApModel
 {
+	const ROLE_ADMIN = 'admin';
+	const ROLE_DISPATCHER = 'dispatcher';
+	
 	public function tableName()
 	{
 		return 'users';

@@ -1,3 +1,6 @@
+<?php 
+	$isAdmin = Yii::app()->user->checkAccess(Users::ROLE_ADMIN);
+?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
@@ -12,11 +15,11 @@
 		<script type="text/javascript" src="/js/bootstrap-datepicker.ru.js"></script>
 		<script type="text/javascript" src="/js/functions.js"></script>
 		<?php if (!Yii::app()->user->isGuest) : ?>
-			<script src="http://api-maps.yandex.ru/1.1/index.xml" type="text/javascript"></script>
+			<?php /*<script src="http://api-maps.yandex.ru/1.1/index.xml" type="text/javascript"></script>*/ ?>
 			<script type="text/javascript" src="/js/jquery.form.js"></script>
 			<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 		<?php endif; ?>
-		<title><?=CHtml::encode($this->pageTitle)?></title>
+		<title>Экскурсии</title>
 	</head>
 	<body>
 		<?php if (!Yii::app()->user->isGuest) : ?>
@@ -25,26 +28,32 @@
 					<h3><a href="/">Экскурсии</a></h3>
 				</li>
 				<li class="list-group-item">
-					<a href="/points"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Объекты</h4></a>
+					<a id="" href="/orders"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Расписание</h4></a>
 				</li>
+				<?php if ($isAdmin) : ?>
+					<li class="list-group-item">
+						<a href="/points"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Объекты</h4></a>
+					</li>
+				<?php endif; ?>
 				<li class="list-group-item">
 					<a href="/routs"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Маршруты</h4></a>
 				</li>
-				<li class="list-group-item">
-					<a href="/tours"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Экскурсии</h4></a>
-				</li>
+				<?php if ($isAdmin) : ?>
+					<li class="list-group-item">
+						<a href="/tours"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Экскурсии</h4></a>
+					</li>
+				<?php endif; ?>
 				<li class="list-group-item">
 					<a id="" href="/guides"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Гиды</h4></a>
 				</li>
 				<li class="list-group-item">
 					<a id="" href="/cars"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Транспорт</h4></a>
 				</li>
-				<li class="list-group-item">
-					<a id="" href="/orders"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Заявки</h4></a>
-				</li>
-				<li class="list-group-item">
-					<a href="/clients"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Клиенты</h4></a>
-				</li>
+				<?php if ($isAdmin) : ?>
+					<li class="list-group-item">
+						<a href="/clients"><i class="fa fa-plus fa-lg fa-fw"></i><h4>&nbsp;Клиенты</h4></a>
+					</li>
+				<?php endif; ?>
 				<li class="list-group-item">
 					<a href="/index/logout"><i class="fa fa-power-off fa-lg fa-fw"></i><h4>&nbsp;Выход</h4></a>
 				</li>

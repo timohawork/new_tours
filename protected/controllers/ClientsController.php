@@ -10,6 +10,19 @@ class ClientsController extends ApController
 		);
 	}
 	
+	public function accessRules() {
+		return array(
+			array(
+				'allow',
+				'roles' => array(Users::ROLE_ADMIN)
+			),
+			array(
+				'deny',
+				'users' => array('*')
+			)
+		);
+	}
+	
 	public function actionIndex() {
 		$clients = Clients::model()->findAll();
 		

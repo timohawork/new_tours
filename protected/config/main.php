@@ -42,10 +42,10 @@ return array(
             'password' => '123456',
             'charset' => 'utf8',
         ),
-		/*'authManager' => array(
+		'authManager' => array(
             'class'	=> 'CDbAuthManager',
             'connectionID' => 'db',
-        ),*/
+        ),
         'errorHandler' => array(
             'errorAction' => '/error',
         ),

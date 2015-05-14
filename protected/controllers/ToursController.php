@@ -46,9 +46,6 @@ class ToursController extends ApController
 			$model->finishDate = $model->rout->getFinishDate($model->startDate, true);
 			$model->isAction = !empty($_POST['isAction']) ? 1 : 0;
 			
-			$model->guideId = $_POST['guideId'];
-			$model->carId = $_POST['carId'];
-			
 			$model->guideCost = $_POST['guideCost'];
 			$model->carCost = $_POST['carCost'];
 			$model->expenses = $_POST['expenses'];
@@ -63,8 +60,6 @@ class ToursController extends ApController
 		$this->render('edit', array(
 			'model' => $model,
 			'routs' => Routs::model()->findAll(),
-			'cars' => Cars::model()->findAll(),
-			'guides' => Guides::model()->findAll(),
 			'regions' => Regions::model()->findAll('parentId IS NULL')
 		));
 	}

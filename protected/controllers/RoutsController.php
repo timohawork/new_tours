@@ -10,6 +10,19 @@ class RoutsController extends ApController
 		);
 	}
 	
+	public function accessRules() {
+		return array(
+			array(
+				'allow',
+				'roles' => array(Users::ROLE_ADMIN)
+			),
+			array(
+				'deny',
+				'users' => array('*')
+			)
+		);
+	}
+	
 	public function actionIndex() {
 		if (Yii::app()->request->isAjaxRequest) {
 			$this->jsonEcho(array('html' => $this->renderPartial('layouts/list', array(

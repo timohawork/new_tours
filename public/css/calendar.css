@@ -1,0 +1,125 @@
+/*#calendar {
+	border: 2px solid #000;
+}*/
+
+#calendar .navigation {
+	margin: 20px auto !important;
+}
+
+#calendar .navigation h3 {
+	display: inline-block;
+	margin: 0 10px;
+}
+
+#calendar .navigation a i {
+	color: #000;
+	vertical-align: 10%;
+}
+#calendar .navigation,
+#calendar .weak-header, 
+#calendar .days-block {
+	width: 100%;
+	margin: 10px auto;
+	text-align: center;
+}
+#calendar .navigation {
+	background-color: #fff;
+}
+
+#calendar .weak-header .label {
+	display: inline-block;
+	width: 132px;
+	font-size: 20px;
+}
+
+#calendar .days-block {
+	overflow: hidden;
+	margin: 0 0 15px 5px;
+	padding-bottom: 5px;
+}
+
+#calendar .days-block .day {
+	float: left;
+	margin: 5px 0 0 4px;
+	width: 132px;
+	height: 70px;
+	line-height: 70px;
+}
+
+#calendar .days-block .day:first-child {
+	margin: 5px 0 0 5px;
+}
+
+#calendar .days-block .day.exist.past {
+	/*opacity: .3;*/
+	background-color: inherit !important;
+	border: 1px dotted #ccc !important;
+	color: #DDD !important;
+}
+
+#calendar .days-block .day.today {
+	background-color: #f9c3b1;
+	border: 10px solid #f00;
+}
+
+#calendar .days-block .day.exist {
+	border: 2px dotted #ccc;
+	_border-radius: .25em;
+	cursor: pointer;
+}
+
+#calendar .days-block .day.exist:hover {
+	background-color: #DDD;
+	font-weight: bold;
+}
+
+#calendar .days-block .day.exist.holiday {
+	background-color: #f9c3b1;
+	border: 2px solid #E9967A;
+	color: #000;
+}
+
+#calendar .days-block .day.active {
+	background-color: #FFF6BF;
+	border: 1px solid #E9967A;
+	border-color: #468847;
+	color: #468847;
+}
+
+#calendar .days-block .day.active.alerted {
+	border: 2px solid #d9230f;
+	color: #d9230f;
+}
+
+#calendar .days-block .day h3 {
+	margin: 10px 0 2px 0;
+	color: inherit;
+	font-size: 2em;
+}
+
+#calendar .days-block .day .indicators {
+	width: 100%;
+	height: 30px;
+}
+
+#calendar .days-block .day .indicators .indicator {
+	display: inline-block;
+	width: 31%;
+	height: 25px;
+}
+
+#calendar .days-block .day .indicators .indicator .fa,
+#calendar .days-block .day .indicators .indicator h4 {
+	position: relative;
+	top: -23px;
+}
+
+#calendar .days-block .day.past .indicators .indicator .fa {
+	color: #DDD;
+}
+
+#calendar .days-block .day .indicators .indicator h4 {
+	display: inline-block;
+	margin: 0;
+	color: inherit;
+}

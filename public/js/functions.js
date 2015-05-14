@@ -467,3 +467,31 @@ function setTimepickers()
 		});
 	});
 }
+
+var Calendar = function()
+{
+	var self = this,
+		options = {
+			selector: '#calendar'
+		};
+	
+	self.render = function(monthDiff) {
+		$.ajax({
+			url: '/orders/get_calendar',
+			type: "POST",
+			data: {monthDiff: monthDiff},
+			success: function(response) {
+				$(options.selector).html(response.html);
+			}
+		});
+	};
+	
+	$(options.selector+' .navigation a').live('click', function() {
+		self.render($(this).attr('rel'));
+		return false;
+	});
+	
+	$(options.selector+' .day.exist').live('click', function() {
+		window.location.href = '/orders/day/date/'+$(this).attr('rel');
+	});
+}

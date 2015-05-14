@@ -101,4 +101,13 @@ class Orders extends ApModel
 			self::PAYMENT_CASHLESS => 'Безнал'
 		);
 	}
+	
+	public static function passSummCount($orders)
+	{
+		$counter = 0;
+		foreach ($orders as $order) {
+			$counter += $order->passCount;
+		}
+		return $counter;
+	}
 }

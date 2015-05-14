@@ -6853,3 +6853,534 @@ REQUEST_URI=/tours/edit/id/2
 in /var/www/new-tours/protected/models/Tours.php (119)
 in /var/www/new-tours/protected/controllers/ToursController.php (57)
 in /var/www/new-tours/public/index.php (13)
+2015/05/13 09:15:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "favicon.ico".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/05/13 09:15:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "favicon.ico".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/05/13 11:44:44 [error] [system.db.CDbCommand] Не удалось выполнить CDbCommand::fetchAll(): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'stratDate' in 'where clause'. Выполнявшийся SQL-запрос: SELECT * FROM `tours` `t` WHERE regionId = :region AND stratDate >= :start AND stratDate <= :end.
+in /var/www/new-tours/protected/models/Regions.php (61)
+in /var/www/new-tours/protected/views/index/layouts/listing.php (42)
+in /var/www/new-tours/protected/views/index/index.php (11)
+2015/05/13 11:44:44 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand не удалось исполнить SQL-запрос: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'stratDate' in 'where clause'. The SQL statement executed was: SELECT * FROM `tours` `t` WHERE regionId = :region AND stratDate >= :start AND stratDate <= :end' in /var/www/new-tours/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/new-tours/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/new-tours/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryAll()
+#2 /var/www/new-tours/framework/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#3 /var/www/new-tours/protected/models/Regions.php(61): CActiveRecord->findAll('regionId = :reg...', Array)
+#4 /var/www/new-tours/protected/views/index/layouts/listing.php(42): Regions->getTours('2015-05-13')
+#5 /var/www/new-tours/framework/web/CBaseController.php(126): require('/var/www/new-to...')
+#6 /var/www/new-tours/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/new-to...', Array, true)
+#7 /var/www/new-tours/framework/web/CController.php(869): CBaseController->renderFile('/var/www/new-to...', Array, true)
+#8 /var/www/new-tours/protected/views/index/index.php(11): CController->renderPartial('layouts/listing', Array)
+#9 /var/www/new-tours/framework/web/CBaseController.php(126): require('/var/www/new-to...')
+#10 /var/www/new-tours/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/new-to...', Array, true)
+#11 /var/www/new-tours/framework/web/CController.php(869): CBaseController->renderFile('/var/www/new-to...', Array, true)
+#12 /var/www/new-tours/framework/web/CController.php(782): CController->renderPartial('index', Array, true)
+#13 /var/www/new-tours/protected/controllers/IndexController.php(46): CController->render('index', Array)
+#14 /var/www/new-tours/framework/web/actions/CInlineAction.php(49): IndexController->actionIndex()
+#15 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#16 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#17 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#18 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#19 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#20 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#21 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#22 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#23 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('')
+#24 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#25 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#26 /var/www/new-tours/public/index.php(13): CApplication->run()
+#27 {main}
+REQUEST_URI=/
+HTTP_REFERER=http://new-tours/tours/edit/id/3
+---
+2015/05/13 12:37:26 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'У вас недостаточно прав для выполнения указанного действия.' in /var/www/new-tours/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/new-tours/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), '?? ?????? ?????...')
+#1 /var/www/new-tours/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('')
+#8 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('routs')
+#9 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/new-tours/public/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/routs
+---
+2015/05/13 12:38:12 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'У вас недостаточно прав для выполнения указанного действия.' in /var/www/new-tours/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/new-tours/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), '?? ?????? ?????...')
+#1 /var/www/new-tours/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('')
+#8 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('points')
+#9 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/new-tours/public/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/points
+---
+2015/05/13 14:17:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "get_calendar".' in /var/www/new-tours/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/new-tours/framework/web/CController.php(270): CController->missingAction('get_calendar')
+#1 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('get_calendar')
+#2 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('index/get_calen...')
+#3 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/new-tours/public/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index/get_calendar
+HTTP_REFERER=http://new-tours/orders
+---
+2015/05/13 14:17:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "get_calendar".' in /var/www/new-tours/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/new-tours/framework/web/CController.php(270): CController->missingAction('get_calendar')
+#1 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('get_calendar')
+#2 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('index/get_calen...')
+#3 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/new-tours/public/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index/get_calendar
+HTTP_REFERER=http://new-tours/orders
+---
+2015/05/13 14:17:45 [error] [php] Undefined index: points (/var/www/new-tours/protected/views/orders/layouts/calendar.php:29)
+Stack trace:
+#0 /var/www/new-tours/framework/web/CController.php(869): OrdersController->renderFile()
+#1 /var/www/new-tours/protected/controllers/OrdersController.php(147): OrdersController->renderPartial()
+#2 /var/www/new-tours/framework/web/actions/CInlineAction.php(49): OrdersController->actionGet_Calendar()
+#3 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): OrdersController->runAction()
+#5 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/new-tours/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#7 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): OrdersController->filterAccessControl()
+#8 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#9 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/new-tours/framework/web/CController.php(265): OrdersController->runActionWithFilters()
+#11 /var/www/new-tours/framework/web/CWebApplication.php(282): OrdersController->run()
+#12 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/new-tours/public/index.php(13): CWebApplication->run()
+REQUEST_URI=/orders/get_calendar
+in /var/www/new-tours/protected/views/orders/layouts/calendar.php (29)
+in /var/www/new-tours/protected/controllers/OrdersController.php (147)
+in /var/www/new-tours/public/index.php (13)
+2015/05/13 14:20:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "day".' in /var/www/new-tours/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/new-tours/framework/web/CController.php(270): CController->missingAction('day')
+#1 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('day')
+#2 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('index/day/date/...')
+#3 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/new-tours/public/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index/day/date/2015-05-22
+HTTP_REFERER=http://new-tours/orders
+---
+2015/05/13 14:58:47 [error] [php] Invalid argument supplied for foreach() (/var/www/new-tours/protected/models/Tours.php:124)
+Stack trace:
+#0 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): OrdersController->runAction()
+#2 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/new-tours/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#4 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): OrdersController->filterAccessControl()
+#5 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#6 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#7 /var/www/new-tours/framework/web/CController.php(265): OrdersController->runActionWithFilters()
+#8 /var/www/new-tours/framework/web/CWebApplication.php(282): OrdersController->run()
+#9 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#10 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/new-tours/public/index.php(13): CWebApplication->run()
+REQUEST_URI=/orders/get_calendar
+in /var/www/new-tours/protected/models/Tours.php (124)
+in /var/www/new-tours/protected/controllers/OrdersController.php (100)
+in /var/www/new-tours/public/index.php (13)
+2015/05/13 14:58:56 [error] [php] Invalid argument supplied for foreach() (/var/www/new-tours/protected/models/Tours.php:124)
+Stack trace:
+#0 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): OrdersController->runAction()
+#2 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/new-tours/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#4 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): OrdersController->filterAccessControl()
+#5 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#6 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#7 /var/www/new-tours/framework/web/CController.php(265): OrdersController->runActionWithFilters()
+#8 /var/www/new-tours/framework/web/CWebApplication.php(282): OrdersController->run()
+#9 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#10 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/new-tours/public/index.php(13): CWebApplication->run()
+REQUEST_URI=/orders/get_calendar
+in /var/www/new-tours/protected/models/Tours.php (124)
+in /var/www/new-tours/protected/controllers/OrdersController.php (100)
+in /var/www/new-tours/public/index.php (13)
+2015/05/13 15:22:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Системе не удалось найти запрашиваемое действие "day".' in /var/www/new-tours/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/new-tours/framework/web/CController.php(270): CController->missingAction('day')
+#1 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('day')
+#2 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('orders/day/2015...')
+#3 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/new-tours/public/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/orders/day/2015-05-29
+HTTP_REFERER=http://new-tours/orders
+---
+2015/05/13 15:29:56 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Некорректный запрос.' in /var/www/new-tours/framework/web/CController.php:336
+Stack trace:
+#0 /var/www/new-tours/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#7 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('day')
+#9 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('orders/day/2015...')
+#10 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/new-tours/public/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/orders/day/2015-06-11
+HTTP_REFERER=http://new-tours/orders
+---
+2015/05/13 15:30:33 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Некорректный запрос.' in /var/www/new-tours/framework/web/CController.php:336
+Stack trace:
+#0 /var/www/new-tours/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#7 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('day')
+#9 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('orders/day/2015...')
+#10 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#11 /var/www/new-tours/public/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/orders/day/2015-05-28
+HTTP_REFERER=http://new-tours/orders
+---
+2015/05/13 15:30:44 [error] [php] Undefined variable: tours (/var/www/new-tours/protected/views/orders/day.php:35)
+Stack trace:
+#0 /var/www/new-tours/framework/web/CController.php(869): OrdersController->renderFile()
+#1 /var/www/new-tours/framework/web/CController.php(782): OrdersController->renderPartial()
+#2 /var/www/new-tours/protected/controllers/OrdersController.php(38): OrdersController->render()
+#3 unknown(0): OrdersController->actionDay()
+#4 /var/www/new-tours/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#5 /var/www/new-tours/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): OrdersController->runAction()
+#8 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#9 /var/www/new-tours/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#10 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): OrdersController->filterAccessControl()
+#11 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#12 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#13 /var/www/new-tours/framework/web/CController.php(265): OrdersController->runActionWithFilters()
+#14 /var/www/new-tours/framework/web/CWebApplication.php(282): OrdersController->run()
+#15 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#16 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#17 /var/www/new-tours/public/index.php(13): CWebApplication->run()
+REQUEST_URI=/orders/day/date/2015-05-27
+in /var/www/new-tours/protected/views/orders/day.php (35)
+in /var/www/new-tours/protected/controllers/OrdersController.php (38)
+in /var/www/new-tours/public/index.php (13)
+2015/05/13 15:38:53 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "Tours.car".' in /var/www/new-tours/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/new-tours/framework/db/ar/CActiveRecord.php(145): CComponent->__get('car')
+#1 /var/www/new-tours/protected/controllers/OrdersController.php(55): CActiveRecord->__get('car')
+#2 [internal function]: OrdersController->actionGet_Data('2')
+#3 /var/www/new-tours/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(OrdersController), Array)
+#4 /var/www/new-tours/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(OrdersController), Object(ReflectionMethod), Array)
+#5 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#8 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 /var/www/new-tours/framework/web/CController.php(1130): CFilterChain->run()
+#12 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAjaxOnly(Object(CFilterChain))
+#13 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#15 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('get_data')
+#17 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('orders/get_data...')
+#18 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/new-tours/public/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/orders/get_data/id/2
+HTTP_REFERER=http://new-tours/orders/day/date/2015-05-27
+---
+2015/05/13 15:39:01 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "Tours.car".' in /var/www/new-tours/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/new-tours/framework/db/ar/CActiveRecord.php(145): CComponent->__get('car')
+#1 /var/www/new-tours/protected/controllers/OrdersController.php(55): CActiveRecord->__get('car')
+#2 [internal function]: OrdersController->actionGet_Data('2')
+#3 /var/www/new-tours/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(OrdersController), Array)
+#4 /var/www/new-tours/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(OrdersController), Object(ReflectionMethod), Array)
+#5 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#8 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 /var/www/new-tours/framework/web/CController.php(1130): CFilterChain->run()
+#12 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAjaxOnly(Object(CFilterChain))
+#13 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#15 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('get_data')
+#17 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('orders/get_data...')
+#18 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /var/www/new-tours/public/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/orders/get_data/id/2
+HTTP_REFERER=http://new-tours/orders/day/date/2015-05-27
+---
+2015/05/13 16:54:27 [error] [php] Trying to get property of non-object (/var/www/new-tours/protected/controllers/OrdersController.php:31)
+Stack trace:
+#0 /var/www/new-tours/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams()
+#2 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): OrdersController->runAction()
+#3 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#4 /var/www/new-tours/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#5 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): OrdersController->filterAccessControl()
+#6 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#7 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#8 /var/www/new-tours/framework/web/CController.php(265): OrdersController->runActionWithFilters()
+#9 /var/www/new-tours/framework/web/CWebApplication.php(282): OrdersController->run()
+#10 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#11 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /var/www/new-tours/public/index.php(13): CWebApplication->run()
+REQUEST_URI=/orders/day/date/2015-05-27
+in /var/www/new-tours/protected/controllers/OrdersController.php (31)
+in /var/www/new-tours/public/index.php (13)
+2015/05/13 17:37:35 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "CHasManyRelation.0".' in /var/www/new-tours/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/new-tours/framework/db/ar/CActiveRecord.php(1998): CComponent->__set('0', 'isPlaced = 0')
+#1 /var/www/new-tours/framework/db/ar/CActiveRecord.php(2408): CBaseActiveRelation->__construct('orders', 'Orders', 'tourId', Array)
+#2 /var/www/new-tours/framework/db/ar/CActiveRecord.php(2389): CActiveRecordMetaData->addRelation('orders', Array)
+#3 /var/www/new-tours/framework/db/ar/CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Tours))
+#4 /var/www/new-tours/framework/db/ar/CActiveRecord.php(658): CActiveRecord->getMetaData()
+#5 /var/www/new-tours/framework/db/ar/CActiveRecord.php(1350): CActiveRecord->getTableSchema()
+#6 /var/www/new-tours/framework/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#7 /var/www/new-tours/protected/models/Tours.php(125): CActiveRecord->findAll('startDate >= :s...', Array)
+#8 /var/www/new-tours/protected/controllers/OrdersController.php(119): Tours::getDayCounters('2015-5-1')
+#9 /var/www/new-tours/framework/web/actions/CInlineAction.php(49): OrdersController->actionGet_Calendar()
+#10 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#12 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#13 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#14 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#15 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#16 /var/www/new-tours/framework/web/CController.php(1130): CFilterChain->run()
+#17 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAjaxOnly(Object(CFilterChain))
+#18 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#19 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#20 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#21 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('get_calendar')
+#22 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('orders/get_cale...')
+#23 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#24 /var/www/new-tours/public/index.php(13): CApplication->run()
+#25 {main}
+REQUEST_URI=/orders/get_calendar
+HTTP_REFERER=http://new-tours/orders
+---
+2015/05/13 17:37:42 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "CHasManyRelation.0".' in /var/www/new-tours/framework/base/CComponent.php:173
+Stack trace:
+#0 /var/www/new-tours/framework/db/ar/CActiveRecord.php(1998): CComponent->__set('0', 'isPlaced = 0')
+#1 /var/www/new-tours/framework/db/ar/CActiveRecord.php(2408): CBaseActiveRelation->__construct('orders', 'Orders', 'tourId', Array)
+#2 /var/www/new-tours/framework/db/ar/CActiveRecord.php(2389): CActiveRecordMetaData->addRelation('orders', Array)
+#3 /var/www/new-tours/framework/db/ar/CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Tours))
+#4 /var/www/new-tours/framework/db/ar/CActiveRecord.php(658): CActiveRecord->getMetaData()
+#5 /var/www/new-tours/framework/db/ar/CActiveRecord.php(1350): CActiveRecord->getTableSchema()
+#6 /var/www/new-tours/framework/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#7 /var/www/new-tours/protected/models/Tours.php(125): CActiveRecord->findAll('startDate >= :s...', Array)
+#8 /var/www/new-tours/protected/controllers/OrdersController.php(119): Tours::getDayCounters('2015-5-1')
+#9 /var/www/new-tours/framework/web/actions/CInlineAction.php(49): OrdersController->actionGet_Calendar()
+#10 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#12 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#13 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#14 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#15 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#16 /var/www/new-tours/framework/web/CController.php(1130): CFilterChain->run()
+#17 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAjaxOnly(Object(CFilterChain))
+#18 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#19 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#20 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#21 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('get_calendar')
+#22 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('orders/get_cale...')
+#23 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#24 /var/www/new-tours/public/index.php(13): CApplication->run()
+#25 {main}
+REQUEST_URI=/orders/get_calendar
+HTTP_REFERER=http://new-tours/orders
+---
+2015/05/13 17:41:14 [error] [exception.CException] exception 'CException' with message 'Не определено свойство "ToursOrders.passCount".' in /var/www/new-tours/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/new-tours/framework/db/ar/CActiveRecord.php(145): CComponent->__get('passCount')
+#1 /var/www/new-tours/protected/models/Tours.php(131): CActiveRecord->__get('passCount')
+#2 /var/www/new-tours/protected/controllers/OrdersController.php(133): Tours::getDayCounters('2015-5-27')
+#3 /var/www/new-tours/framework/web/actions/CInlineAction.php(49): OrdersController->actionGet_Calendar()
+#4 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/new-tours/framework/web/CController.php(1130): CFilterChain->run()
+#11 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAjaxOnly(Object(CFilterChain))
+#12 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#14 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('get_calendar')
+#16 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('orders/get_cale...')
+#17 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /var/www/new-tours/public/index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/orders/get_calendar
+HTTP_REFERER=http://new-tours/orders
+---
+2015/05/13 18:25:11 [error] [php] Trying to get property of non-object (/var/www/new-tours/protected/views/orders/layouts/list.php:44)
+Stack trace:
+#0 /var/www/new-tours/framework/web/CController.php(869): OrdersController->renderFile()
+#1 /var/www/new-tours/protected/views/orders/day.php(12): OrdersController->renderPartial()
+#2 /var/www/new-tours/framework/web/CBaseController.php(126): require()
+#3 /var/www/new-tours/framework/web/CBaseController.php(95): OrdersController->renderInternal()
+#4 /var/www/new-tours/framework/web/CController.php(869): OrdersController->renderFile()
+#5 /var/www/new-tours/framework/web/CController.php(782): OrdersController->renderPartial()
+#6 /var/www/new-tours/protected/controllers/OrdersController.php(50): OrdersController->render()
+#7 unknown(0): OrdersController->actionDay()
+#8 /var/www/new-tours/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#9 /var/www/new-tours/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams()
+#11 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): OrdersController->runAction()
+#12 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#13 /var/www/new-tours/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#14 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): OrdersController->filterAccessControl()
+#15 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#16 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#17 /var/www/new-tours/framework/web/CController.php(265): OrdersController->runActionWithFilters()
+#18 /var/www/new-tours/framework/web/CWebApplication.php(282): OrdersController->run()
+#19 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#20 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#21 /var/www/new-tours/public/index.php(13): CWebApplication->run()
+REQUEST_URI=/orders/day/date/2015-05-27
+in /var/www/new-tours/protected/views/orders/layouts/list.php (44)
+in /var/www/new-tours/protected/views/orders/day.php (12)
+in /var/www/new-tours/protected/controllers/OrdersController.php (50)
+2015/05/14 08:47:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "favicon.ico".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/05/14 08:47:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "favicon.ico".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/05/14 08:47:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "favicon.ico".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/05/14 09:41:22 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Некорректный запрос.' in /var/www/new-tours/framework/web/CController.php:336
+Stack trace:
+#0 /var/www/new-tours/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 /var/www/new-tours/framework/web/CController.php(1130): CFilterChain->run()
+#7 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAjaxOnly(Object(CFilterChain))
+#8 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('edit')
+#12 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('orders/edit')
+#13 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /var/www/new-tours/public/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/orders/edit
+HTTP_REFERER=http://new-tours/orders/day/date/2015-05-27
+---
+2015/05/14 10:41:29 [error] [php] Undefined index: orders (/var/www/new-tours/protected/controllers/OrdersController.php:88)
+Stack trace:
+#0 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): OrdersController->runAction()
+#1 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/new-tours/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): OrdersController->filterAccessControl()
+#4 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/new-tours/framework/web/CController.php(1130): CFilterChain->run()
+#6 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): OrdersController->filterAjaxOnly()
+#7 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#8 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#9 /var/www/new-tours/framework/web/CController.php(265): OrdersController->runActionWithFilters()
+#10 /var/www/new-tours/framework/web/CWebApplication.php(282): OrdersController->run()
+#11 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#12 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/new-tours/public/index.php(13): CWebApplication->run()
+REQUEST_URI=/orders/edit
+in /var/www/new-tours/protected/controllers/OrdersController.php (88)
+in /var/www/new-tours/public/index.php (13)
+2015/05/14 12:46:04 [error] [php] Undefined variable: tourModel (/var/www/new-tours/protected/controllers/OrdersController.php:97)
+Stack trace:
+#0 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): OrdersController->runAction()
+#1 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/new-tours/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): OrdersController->filterAccessControl()
+#4 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/new-tours/framework/web/CController.php(1130): CFilterChain->run()
+#6 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): OrdersController->filterAjaxOnly()
+#7 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#8 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#9 /var/www/new-tours/framework/web/CController.php(265): OrdersController->runActionWithFilters()
+#10 /var/www/new-tours/framework/web/CWebApplication.php(282): OrdersController->run()
+#11 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#12 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/new-tours/public/index.php(13): CWebApplication->run()
+REQUEST_URI=/orders/edit
+in /var/www/new-tours/protected/controllers/OrdersController.php (97)
+in /var/www/new-tours/public/index.php (13)
+2015/05/14 12:50:41 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'У вас недостаточно прав для выполнения указанного действия.' in /var/www/new-tours/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/new-tours/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), '?? ?????? ?????...')
+#1 /var/www/new-tours/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/new-tours/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/new-tours/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/new-tours/framework/web/CWebApplication.php(282): CController->run('')
+#8 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('routs')
+#9 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/new-tours/public/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/routs
+HTTP_REFERER=http://new-tours/
+---

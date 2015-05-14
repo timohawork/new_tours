@@ -28,10 +28,12 @@ class IndexController extends ApController
 	
 	public function actionIndex() {
 		$regions = Regions::model()->findAllByAttributes(array('parentId' => null));
+		$date = date("Y-m-d");
 		
 		if (Yii::app()->request->isAjaxRequest) {
 			$this->jsonEcho(array('html' => $this->renderPartial('layouts/listing', array(
-				'regions' => $regions
+				'regions' => $regions,
+				'date' => ArrayHelper::val($_POST, 'date', $date)
 			), true)));
 		}
 		
@@ -39,6 +41,7 @@ class IndexController extends ApController
 			->registerScriptFile('/js/app/index.js');
 		$this->render('index', array(
 			'regions' => $regions,
+			'date' => $date,
 			'points' => Points::model()->findAll()
 		));
 	}

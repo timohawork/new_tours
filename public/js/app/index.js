@@ -175,11 +175,20 @@ $(document).ready(function() {
 		return false;
 	});
 	
+	$('#listing_date').datepicker({
+		dateFormat: "yy-mm-dd",
+		defaultDate: "+1w",
+		changeMonth: true
+	}).live('change', refreshTable);
+	
 	function refreshTable()
 	{
 		$.ajax({
 			url: "/index",
 			type: "POST",
+			data: {
+				date: $('#listing_date').val()
+			},
 			async: true,
 			cache: false,
 			success: function(response) {
