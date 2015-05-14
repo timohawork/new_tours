@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$('#add-new, .ap-blocks-block').live('click', function() {
-		window.location.href = '/routs/edit'+($(this).hasClass('ap-blocks-block') ? '/id/'+$(this).data('id') : '');
+		window.location.href = $(this).hasClass('ap-blocks-block') ? $(this).data('href') : '/routs/edit';
 	});
 	
 	$('.fa-times').live('click', function() {

@@ -1,7 +1,9 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h1>Маршруты</h1>
-		<i id="add-new" class="fa fa-plus fa-2x"></i>
+		<?php if ($isAdmin) : ?>
+			<i id="add-new" class="fa fa-plus fa-2x"></i>
+		<?php endif; ?>
 	</div>
 	<div class="panel-body">
 		<div class="list-filter">
@@ -17,7 +19,8 @@
 		</div>
 		<div id="routs_list">
 			<?php $this->renderPartial('layouts/list', array(
-				'routs' => $routs
+				'routs' => $routs,
+				'isAdmin' => $isAdmin
 			)); ?>
 		</div>
 	</div>

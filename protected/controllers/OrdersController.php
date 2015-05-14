@@ -5,7 +5,7 @@ class OrdersController extends ApController
 	public function filters()
 	{
 		return array(
-			'ajaxOnly + edit, get_data, get_calendar, delete',
+			'ajaxOnly + create, edit, get_data, get_calendar',
 			'accessControl'
 		);
 	}
@@ -163,14 +163,6 @@ class OrdersController extends ApController
 		$model->save();
 		
 		$this->jsonEcho(array('error' => false));
-	}
-	
-	public function actionDelete($id)
-	{
-		if (null === ($model = Orders::model()->findByPk($id))) {
-			Yii::app()->end();
-		}
-		$model->delete();
 	}
 	
 	public function actionGet_Calendar()

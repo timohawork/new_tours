@@ -10,6 +10,24 @@ class ToursController extends ApController
 		);
 	}
 	
+	public function accessRules() {
+		return array(
+			array(
+				'allow',
+				'roles' => array(Users::ROLE_ADMIN)
+			),
+			array(
+				'allow',
+				'actions' => array('edit'),
+				'roles' => array(Users::ROLE_DISPATCHER)
+			),
+			array(
+				'deny',
+				'users' => array('*')
+			)
+		);
+	}
+	
 	public function actionIndex() {
 		if (Yii::app()->request->isAjaxRequest) {
 			$this->jsonEcho(array('html' => $this->renderPartial('layouts/list', array(

@@ -17,6 +17,11 @@ class RoutsController extends ApController
 				'roles' => array(Users::ROLE_ADMIN)
 			),
 			array(
+				'allow',
+				'actions' => array('index', 'view'),
+				'roles' => array(Users::ROLE_DISPATCHER)
+			),
+			array(
 				'deny',
 				'users' => array('*')
 			)
@@ -24,9 +29,11 @@ class RoutsController extends ApController
 	}
 	
 	public function actionIndex() {
+		$isAdmin = Yii::app()->user->checkAccess(Users::ROLE_ADMIN);
 		if (Yii::app()->request->isAjaxRequest) {
 			$this->jsonEcho(array('html' => $this->renderPartial('layouts/list', array(
-				'routs' => Routs::getRouts($_POST)
+				'routs' => Routs::getRouts($_POST),
+				'isAdmin' => $isAdmin
 			), true)));
 		}
 		
@@ -34,7 +41,8 @@ class RoutsController extends ApController
 			->registerScriptFile('/js/app/routs.js');
 		$this->render('index', array(
 			'routs' => Routs::getRouts(),
-			'regions' => Regions::model()->findAll('parentId IS NULL')
+			'regions' => Regions::model()->findAll('parentId IS NULL'),
+			'isAdmin' => $isAdmin
 		));
 	}
 	
@@ -149,6 +157,54 @@ class RoutsController extends ApController
 		Yii::app()->getClientScript()
 			->registerScriptFile('/js/app/rout_edit.js');
 		$this->render('edit', array(
+			'model' => $model,
+			'points' => $regionPoints,
+			'routPoints' => $points,
+			'regions' => Regions::model()->findAll('parentId IS NULL')
+		));
+	}
+	
+	public function actionView($id) {
+		if (null === ($model = Routs::model()->findByPk($id))) {
+			throw new CHttpException(404, "Такого маршрута не существует");
+		}
+		
+		$points = array(
+			'start' => null,
+			'finish' => null,
+			'required' => array(),
+			'additional' => array()
+		);
+		foreach ($model->points as $point) {
+			switch ($point->type) {
+				case RoutPoints::START:
+					$points['start'] = $point->point;
+				break;
+			
+				case RoutPoints::FINISH:
+					$points['finish'] = $point->point;
+				break;
+			
+				case RoutPoints::REQUIRED:
+					$point->point->time = $point->time;
+					$points['required'][] = $point->point;
+				break;
+			
+				case RoutPoints::ADDITIONAL:
+					$point->point->time = $point->time;
+					$points['additional'][] = $point->point;
+				break;
+			}
+		}
+		
+		if (!$model->isNewRecord) {
+			$regionPoints = Points::getPoints(array('regionId' => ArrayHelper::columnValues($model->regions, 'id')));
+		}
+		else {
+			$regionPoints = array();
+		}
+		
+		$this->render('view', array(
 			'model' => $model,
 			'points' => $regionPoints,
 			'routPoints' => $points,
