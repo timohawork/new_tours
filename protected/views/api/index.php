@@ -5,24 +5,20 @@
 		<label for="method-select" class="col-sm-3 control-label">Метод</label>
 		<div class="col-sm-8">
 			<select id="method-select" name="method" class="form-control">
-				<option value="listing">listing</option>
-				<option value="types_list">types_list</option>
-				<option value="obj_get">obj_get</option>
-				<option value="mark_edit">mark_edit</option>
 				<option value="login">login</option>
+				<option value="listing">listing</option>
+				<?php /*<option value="types_list">types_list</option>
+				<option value="obj_get">obj_get</option>
+				<option value="mark_edit">mark_edit</option>*/ ?>
 			</select>
 		</div>
 	</div>
 	<div id="request-inputs" class="form-group">
 		<label for="type-title-input" class="col-sm-3 control-label">Данные</label>
 		<div class="col-sm-8">
-			<select id="type-select" name="type" class="form-control">
-				<option value="regions" selected>regions</option>
-				<option value="cities">cities</option>
-				<option value="groups">groups</option>
-			</select>
+			<input id="email-input" type="text" name="email" class="form-control" placeholder="Email">
 			<br>
-			<input id="listing-type-id-input" type="text" name="id" class="form-control" placeholder="ID">
+			<input id="password-input" type="password" name="password" class="form-control" placeholder="Password">
 		</div>
 	</div>
 	<a href="#" class="btn btn-primary">Отправить</a>

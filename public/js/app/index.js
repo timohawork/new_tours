@@ -27,10 +27,6 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	$(window).scroll(function() {
-		$('#main-menu').animate({top: $(window).scrollTop()}, 50);
-	});
-	
 	$('.ap-block-header').live('click', function() {
 		folding.toggle($(this).find('.ap-caret'));
 	});
@@ -46,6 +42,7 @@ $(document).ready(function() {
 			type: "POST",
 			async: true,
 			success: function(response) {
+				$('#region-edit .modal-title').text('Редактирование '+(response.data.type === 'region' ? 'региона' : 'города'));
 				$('#region-name-input').val(response.data.title);
 				$('#region-description-input').val(response.data.description);
 				$('#region-start-point-input').val(response.data.startPointId);
@@ -73,9 +70,10 @@ $(document).ready(function() {
 			obj = {
 				url: "/regions/add",
 				type: "POST",
-				async: true,
+				async: false,
 				success: function(response) {
 					refreshTable();
+					$('.ap-block[data-id="'+response.data.id+'"] .fa-pencil').trigger('click');
 				}
 			};
 		if (block.hasClass('region')) {
@@ -91,7 +89,7 @@ $(document).ready(function() {
 			type: "POST",
 			async: true,
 			data: $('#region-edit form').serializeArray(),
-			success: function(response) {
+			success: function() {
 				$('#region-edit').modal('hide');
 				refreshTable();
 			}
@@ -147,12 +145,21 @@ $(document).ready(function() {
 	
 	/* ---------------------------------------------------------------------- */
 	
-	$('.ap-block .fa-times, .modal .fa-times').live('click', function() {
+	$('.fa-times').live('click', function() {
 		if ($(this).closest('#image-editor').length || !confirm('Вы уверены, что хотите удалить запись?')) {
 			return false;
 		}
+		var type, id;
+		if ($(this).parent().hasClass('rout')) {
+			type = 'routs';
+			id = $(this).parent().data('id');
+		}
+		else {
+			type = 'regions';
+			id = $(this).closest('.ap-block').data('id');
+		}
 		$.ajax({
-			url: "/regions/delete/id/"+$(this).closest('.ap-block').attr('data-id'),
+			url: "/"+type+"/delete/id/"+id,
 			type: "POST",
 			async: true,
 			success: refreshTable
@@ -164,13 +171,20 @@ $(document).ready(function() {
 		if ($(this).closest('#image-editor').length) {
 			return;
 		}
+		var type, id;
+		if ($(this).parent().hasClass('rout')) {
+			type = 'routs';
+			id = $(this).parent().data('id');
+		}
+		else {
+			type = 'regions';
+			id = $(this).closest('.ap-block').data('id');
+		}
 		$.ajax({
-			url: "/regions/activate/id/"+$(this).closest('.ap-block').attr('data-id'),
+			url: "/"+type+"/activate/id/"+id,
 			type: "POST",
 			async: true,
-			success: function(response) {
-				refreshTable();
-			}
+			success: refreshTable
 		});
 		return false;
 	});
@@ -189,11 +203,15 @@ $(document).ready(function() {
 			data: {
 				date: $('#listing_date').val()
 			},
-			async: true,
+			async: false,
 			cache: false,
 			success: function(response) {
-				refreshImg();
 				$('#listing').html(response.html);
+				$('#region-start-point-input').empty();
+				$.each(response.points, function(key, point) {
+					$('#region-start-point-input').append('<option value="'+point.id+'">'+point.title+'</option>');
+				});
+				refreshImg();
 				folding.init(false);
 			}
 		});

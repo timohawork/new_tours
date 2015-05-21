@@ -4,6 +4,7 @@ class IndexController extends ApController
 {
 	public function filters() {
 		return array(
+			'ajaxOnly + support_message',
 			'accessControl'
 		);
 	}
@@ -28,21 +29,25 @@ class IndexController extends ApController
 	
 	public function actionIndex() {
 		$regions = Regions::model()->findAllByAttributes(array('parentId' => null));
-		$date = date("Y-m-d");
+		$isAdmin = Yii::app()->user->checkAccess(Users::ROLE_ADMIN);
+		$points = Points::model()->findAll();
 		
 		if (Yii::app()->request->isAjaxRequest) {
-			$this->jsonEcho(array('html' => $this->renderPartial('layouts/listing', array(
-				'regions' => $regions,
-				'date' => ArrayHelper::val($_POST, 'date', $date)
-			), true)));
+			$this->jsonEcho(array(
+				'html' => $this->renderPartial('layouts/listing', array(
+					'regions' => $regions,
+					'isAdmin' => $isAdmin
+				), true),
+				'points' => $points
+			));
 		}
 		
 		Yii::app()->getClientScript()
 			->registerScriptFile('/js/app/index.js');
 		$this->render('index', array(
 			'regions' => $regions,
-			'date' => $date,
-			'points' => Points::model()->findAll()
+			'isAdmin' => $isAdmin,
+			'points' => $points
 		));
 	}
 	
@@ -63,5 +68,16 @@ class IndexController extends ApController
 	public function actionLogout() {
 		Yii::app()->user->logout(true);
 		$this->redirect(Yii::app()->user->loginUrl);
+	}
+	
+	public function actionSupport_Message()
+	{
+		if (empty($_POST['message'])) {
+			return false;
+		}
+		$message = new Support();
+		$message->userId = Yii::app()->user->id;
+		$message->message = $_POST['message'];
+		$message->save();
 	}
 }

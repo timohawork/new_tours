@@ -18,9 +18,6 @@
 				<h4 class="modal-title"></h4>
 			</div>
 			<div class="modal-body">
-				<a class="preview-image hide" data-url="">
-					<img src="" alt="">
-				</a>
 				<form class="form-horizontal" role="form" action="" method="POST">
 					<div class="form-group">
 						<label for="login-input" class="col-sm-3 control-label">Логин</label>
@@ -29,13 +26,13 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="social-id-input" class="col-sm-3 control-label">Пароль</label>
+						<label for="password-input" class="col-sm-3 control-label">Пароль</label>
 						<div class="col-sm-8">
 							<input id="password-input" type="password" name="password" class="form-control" data-validate="required:0">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="social-id-input" class="col-sm-3 control-label">Пароль ещё раз</label>
+						<label for="password-repeat-input" class="col-sm-3 control-label">Пароль ещё раз</label>
 						<div class="col-sm-8">
 							<input id="password-repeat-input" type="password" name="passwordRepeat" class="form-control" data-validate="compare:password-input">
 						</div>

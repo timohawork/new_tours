@@ -63,8 +63,10 @@ $(document).ready(function() {
 	});
 	
 	$('#add-map').live('click', function() {
-		$('#map-marker').fadeIn(300);
-		setMap('#map-marker', true, $('#ll').val());
+		if (!$('#map-marker').html().length) {
+			$('#map-marker').fadeIn(300);
+			setMap('#map-marker', true, $('#ll').val());
+		}
 		return false;
 	});
 	

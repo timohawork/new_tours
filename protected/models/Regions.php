@@ -54,10 +54,27 @@ class Regions extends ApModel
 		if ($date === null) {
 			$date = date("Y-m-d");
 		}
-		return Tours::model()->findAll('regionId = :region AND startDate >= :start AND startDate <= :end', array(
+		return Tours::model()->findAll('regionId = :region AND startDate >= :start AND endDate <= :end', array(
 			':region' => $this->id,
 			':start' => $date.' 00:00:00',
 			':end' => $date.' 23:59:59'
 		));
+	}
+	
+	public static function newRegion($regionId)
+	{
+		$model = new Regions();
+		$model->title = empty($regionId) ? 'Регион' : 'Город';
+		$model->parentId = !empty($regionId) ? $regionId : null;
+		$model->save();
+		return $model;
+	}
+	
+	public function imageUrl()
+	{
+		if (empty($this->image)) {
+			return null;
+		}
+		return RoutPhotos::DIR_NAME.'/regions/'.$this->id.'/'.$this->image.'_small.jpg';
 	}
 }

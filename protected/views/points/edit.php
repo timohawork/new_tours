@@ -8,7 +8,7 @@
 			<li><a href="#serice" data-toggle="tab">Сервисная</a></li>
 			<li><a href="#regions" data-toggle="tab">Регионы</a></li>
 		</ul>
-		<form class="form-horizontal" role="form" action="" method="POST">
+		<form class="form-horizontal with-tabs" role="form" action="" method="POST">
 			<div class="tab-content">
 				<div class="tab-pane fade active in" id="main">
 					<div class="form-group">
@@ -64,7 +64,11 @@
 					<div class="form-group">
 						<label for="rating" class="col-sm-3 control-label">Рейтинг настоящий</label>
 						<div class="col-sm-2">
-							<input id="rating" type="number" name="rating" data-validate="required:1;min:0" class="form-control" value="<?=ArrayHelper::val($model, 'rating', 0)?>">
+							<select id="rating" name="rating" class="form-control">
+								<?php for ($i = 5; $i >= 0; $i--) : ?>
+									<option value="<?=$i?>"<?=$model->rating == $i ? ' selected' : ''?>><?=$i?></option>
+								<?php endfor; ?>
+							</select>
 						</div>
 					</div>
 					<div class="form-group">

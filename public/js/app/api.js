@@ -26,28 +26,20 @@ $(document).ready(function() {
 		var inputs = $('#request-inputs .col-sm-8');
 		clearResponse();
 		switch ($(this).val()) {
-			case 'listing':
-				inputs.html(
-					'<select id="type-select" name="type" class="form-control">'+
-						'<option value="regions" selected>regions</option>'+
-						'<option value="cities">cities</option>'+
-						'<option value="groups">groups</option>'+
-					'</select>'+
-					'<br>'+
-					'<input id="listing-type-id-input" type="text" name="id" class="form-control" placeholder="ID">'
-				);
-			break;
-			
-			case 'types_list':
-				inputs.html('');
-			break;
-			
 			case 'login':
 				inputs.html(
 					'<input id="email-input" type="text" name="email" class="form-control" placeholder="Email">'+
 					'<br>'+
 					'<input id="password-input" type="password" name="password" class="form-control" placeholder="Password">'
 				);
+			break;
+			
+			case 'listing':
+				inputs.html('');
+			break;
+			
+			case 'types_list':
+				inputs.html('');
 			break;
 			
 			case 'obj_get':

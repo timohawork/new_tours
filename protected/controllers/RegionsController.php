@@ -16,6 +16,7 @@ class RegionsController extends ApController
 		
 		$this->jsonEcho(array('data' => array(
 			'id' => $regionModel->id,
+			'type' => empty($regionModel->parentId) ? 'region' : 'city',
 			'uid' => $regionModel->uid,
 			'title' => $regionModel->title,
 			'description' => $regionModel->description,
@@ -28,12 +29,22 @@ class RegionsController extends ApController
 	}
 	
 	public function actionAdd() {
-		$regionModel = new Regions();
-		$regionModel->title = 'Новый';
+		$regionModel = Regions::newRegion(ArrayHelper::val($_POST, 'regionId'));
 		if (!empty($_POST['regionId'])) {
 			$regionModel->parentId = $_POST['regionId'];
+			$regionModel->save();
+			Points::newPoint($regionModel->id);
 		}
-		$regionModel->save();
+		if (empty($_POST['regionId'])) {
+			$newCity = Regions::newRegion($regionModel->id);
+			Points::newPoint($newCity->id, true);
+		}
+		$this->jsonEcho(array(
+			'type' => ApController::TYPE_OK,
+			'data' => array(
+				'id' => $regionModel->id
+			)
+		));
 	}
 	
 	public function actionEdit() {

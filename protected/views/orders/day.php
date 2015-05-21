@@ -1,8 +1,9 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<a href="/tours/edit" class="left-side"><i class="fa fa-plus fa-3x"></i></a>
+		<a href="/tours/edit/date/<?=$date?>" class="left-side"><i class="fa fa-plus fa-3x"></i></a>
 		<h1>Заявки на <?=$date?></h1>
 		<div class="indicators">
+			<div class="indicator tours"><i class="fa fa-flag fa-2x"></i> <span><?=count($tours)?></span></div>
 			<div class="indicator placed"><i class="fa fa-users fa-2x"></i> <span><?=$indicators['placed']?></span></div>
 			<div class="indicator not-placed<?=$indicators['notPlaced'] > 0 ? ' active' : ''?>"><i class="fa fa-exclamation fa-2x"></i> <span><?=$indicators['notPlaced']?></span></div>
 		</div>

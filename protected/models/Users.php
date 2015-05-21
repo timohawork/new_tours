@@ -46,4 +46,27 @@ class Users extends ApModel
 	{
 		return parent::model($className);
 	}
+	
+	public static function getRoles()
+	{
+		return array(
+			self::ROLE_ADMIN => 'Администратор',
+			self::ROLE_DISPATCHER => 'Диспетчер'
+		);
+	}
+	
+	public static function getRoleDesc($role)
+	{
+		$list = self::getRoles();
+		return $list[$role];
+	}
+	
+	public function getRole()
+	{
+		return Yii::app()->db->createCommand()
+			->select('itemname')
+			->from('AuthAssignment')
+			->where('userId = '.$this->id)
+			->queryScalar();
+	}
 }

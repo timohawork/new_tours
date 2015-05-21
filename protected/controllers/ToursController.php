@@ -43,12 +43,13 @@ class ToursController extends ApController
 		));
 	}
 	
-	public function actionEdit($id = null) {
+	public function actionEdit($id = null, $date = null) {
 		if (null !== $id && null === ($model = Tours::model()->findByPk($id))) {
 			throw new CHttpException(404, "Такой экскурсии не существует");
 		}
 		else if (null === $id) {
 			$model = new Tours();
+			$model->startDate = null !== $date ? $date : date("Y-m-d 09:00:00");
 		}
 		
 		if (Yii::app()->request->isPostRequest) {
@@ -68,9 +69,10 @@ class ToursController extends ApController
 			$model->carCost = $_POST['carCost'];
 			$model->expenses = $_POST['expenses'];
 			$model->margin = $_POST['margin'];
+			$model->active = 1;
 			
 			$model->save();
-			$this->redirect("/tours");
+			$this->redirect("/orders/day/date/".$_POST['startDate']);
 		}
 		
 		Yii::app()->getClientScript()

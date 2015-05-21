@@ -111,7 +111,7 @@ class RoutsController extends ApController
 							$relationModel->save();
 						}
 					}
-					$this->redirect('/routs');
+					$this->redirect('/index');
 				}
 				else {
 					$model->delete();
@@ -160,7 +160,7 @@ class RoutsController extends ApController
 			'model' => $model,
 			'points' => $regionPoints,
 			'routPoints' => $points,
-			'regions' => Regions::model()->findAll('parentId IS NULL')
+			'regions' => Regions::model()->findAllByAttributes(array('parentId' => null))
 		));
 	}
 	

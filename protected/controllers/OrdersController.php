@@ -190,7 +190,7 @@ class OrdersController extends ApController
 			if ($i == $dayOfWeek) {
 				$days[$num][$i] = array(
 					'num' => $dayCount,
-					'counters' => Tours::getDayCounters($year."-".$month."-".$dayCount)
+					'counters' => Tours::getDayCounters($year."-".($month < 10 ? '0'.$month : $month)."-".($dayCount < 10 ? '0'.$dayCount : $dayCount))
 				);
 				$dayCount++;
 			}
@@ -204,7 +204,7 @@ class OrdersController extends ApController
 			for ($i = 0; $i < 7; $i++) {
 				$days[$num][$i] = array(
 					'num' => $dayCount,
-					'counters' => Tours::getDayCounters($year."-".$month."-".$dayCount)
+					'counters' => Tours::getDayCounters($year."-".($month < 10 ? '0'.$month : $month)."-".($dayCount < 10 ? '0'.$dayCount : $dayCount))
 				);
 				$dayCount++;
 				if ($dayCount > $daysInMonth) {

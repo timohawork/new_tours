@@ -8,7 +8,7 @@
 			<li><a href="#regions" data-toggle="tab">Регионы</a></li>
 			<li><a href="#points" data-toggle="tab">Объекты</a></li>
 		</ul>
-		<form class="form-horizontal" role="form" action="" method="POST">
+		<form class="form-horizontal with-tabs" role="form" action="" method="POST">
 			<div class="tab-content">
 				<div class="tab-pane fade active in" id="main">
 					<div class="form-group">
@@ -131,7 +131,12 @@
 					</div>
 				</div>
 				<div class="tab-pane fade" id="regions">
-					<?php $regionsIds = ArrayHelper::columnValues($model->regions, 'id'); ?>
+					<?php 
+						$regionsIds = ArrayHelper::columnValues($model->regions, 'id');
+						if (!empty($_GET['region'])) {
+							$regionsIds[] = $_GET['region'];
+						}
+					?>
 					<?php foreach ($regions as $region) : ?>
 						<div class="checkbox">
 							<label><input type="checkbox" name="regions[]" value="<?=$region->id?>"<?=in_array($region->id, $regionsIds) ? ' checked' : ''?>> <?=$region->title?></label>

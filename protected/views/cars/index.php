@@ -68,17 +68,17 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="base-input" class="col-sm-3 control-label">Регион базирования</label>
-						<div class="col-sm-8">
-							<input id="base-input" type="text" name="baseRegion" data-validate="required:1" class="form-control">
-						</div>
-					</div>
-					<div class="form-group">
 						<label class="col-sm-3 control-label">Регионы работы</label>
 						<div class="col-sm-8 regions">
 							<?php foreach ($regions as $region) : ?>
 								<div><label><input type="checkbox" name="regions[<?=$region->id?>]"> <?=$region->title?></label></div>
 							<?php endforeach; ?>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="base-input" class="col-sm-3 control-label">Регион базирования</label>
+						<div class="col-sm-8">
+							<input id="base-input" type="text" name="baseRegion" data-validate="required:1" class="form-control">
 						</div>
 					</div>
 					<input id="car-id" type="hidden" name="id" value="">

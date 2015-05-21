@@ -5,6 +5,9 @@
  */
 class ApController extends CController
 {
+	const TYPE_OK = 'ok';
+	const TYPE_ERROR = 'error';
+	
 	public function setMessage($key, $message)
 	{
 		return Yii::app()->user->setFlash($key, $message);

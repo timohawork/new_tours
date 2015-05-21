@@ -55,12 +55,51 @@ $(document).ready(function() {
 		if ($('.timepicker-toggle').length && !$(e.target).hasClass('timepicker') && !$(e.target).closest('.timepicker-toggle').length) {
 			$('.timepicker-toggle').remove();
 		}
+		if ($('#support.open').length && !$(e.target).closest('#support').length) {
+			$('#support .form-toggle').trigger('click');
+		}
 	});
 	
 	$(".preview-image").live('click', function() {
 		var block = $('<div id="preview-image-block"><img class="img-thumbnail" src="'+$(this).attr('data-url')+'" alt=""></div>');
 		$('body').append(block);
 		block.animate({opacity: 1}, 700);
+		return false;
+	});
+	
+	$('#support .form-toggle').live('click', function() {
+		var isOpen = $('#support').hasClass('open');
+		if (!isOpen) {
+			$('#support p').remove();
+			$('#support textarea').css('display', 'block').val('');
+			$('#support .btn').attr('disabled', false);
+		}
+		$('#support').animate({
+			right: isOpen ? -332 : 5
+		}, 300, function() {
+			$(this).toggleClass('open');
+		});
+		return false;
+	});
+	
+	$('#support.open .btn').live('click', function() {
+		var textarea = $('#support textarea');
+		if (!textarea.val().length) {
+			return false;
+		}
+		$.ajax({
+			url: "/index/support_message",
+			type: "POST",
+			data: {message: textarea.val()},
+			async: true,
+			success: function() {
+				$('#support .btn').attr('disabled', true);
+				textarea.fadeOut(300, function() {
+					$('#support .panel-body').prepend('<p>Сообщение отправлено!</p>')
+					setTimeout(function() {$('#support .form-toggle').trigger('click');}, 1000);
+				});
+			}
+		});
 		return false;
 	});
 });
@@ -108,6 +147,13 @@ function isValidate(form)
 		$(form+' [data-validate]').each(function() {
 			inputValidation($(this));
 		});
+		if ($(form).hasClass('with-tabs')) {
+			$('.nav-tabs a').each(function() {
+				var hasError = $($(this).attr('href')+' .has-error').length;
+				$(this).removeClass(hasError ? 'success' : 'error')
+					.addClass(hasError ? 'error' : 'success');
+			});
+		}
 		return $(form+' [data-validate]').length == $(form+' .has-success').length;
 	}
 	return true;

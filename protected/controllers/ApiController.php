@@ -46,84 +46,75 @@ class ApiController extends ApController
 	
 	public function actionListing()
 	{
-		if (!empty($_POST['type']) && 'regions' !== $_POST['type'] && empty($_POST['id'])) {
-			$this->jsonEcho(array(
-				'type' => self::TYPE_ERROR,
-				'errors' => array('Неверный запрос.')
-			));
-		}
 		$data = array();
-		switch ($_POST['type']) {
-			case 'regions':
-				foreach (Regions::model()->getList() as $i => $region) {
-					$data[$i] = array(
-						'header' => array(
-							'uid' => $region->uid,
-							'parent' => null,
-							'title' => $region->title,
-						),
-						'container' => array(
-							'description' => $region->description,
-							'active' => $region->active,
-							'image' => $region->image,
-							'listing' => ArrayHelper::columnValues($region->cities, 'uid')
-						)
-					);
-				}
-			break;
-		
-			case 'cities':
-				if (null === ($regionModel = Regions::model()->findByAttributes(array('uid' => $_POST['id'])))) {
-					$this->jsonEcho(array(
-						'type' => self::TYPE_ERROR,
-						'errors' => array('Неверный uid региона.')
-					));
-				}
-				foreach ($regionModel->cities as $i => $city) {
-					$data[$i] = array(
-						'header' => array(
-							'uid' => $city->uid,
-							'parent' => $city->region->uid,
-							'title' => $city->title,
-						),
-						'container' => array(
-							'description' => $city->description,
-							'active' => $city->active,
-							'image' => $city->image,
-							'listing' => array()
-						)
-					);
-					foreach ($city->groups as $group) {
-						$data[$i]['container']['listing'][] = $group->uid;
+		$regions = Regions::model()->findAllByAttributes(array(
+			'parentId' => null,
+			'active' => 1
+		));
+		foreach ($regions as $i => $region) {
+			$startPoint = Points::startPoint($region->startPointId);
+			$data[$i] = array(
+				'header' => array(
+					'uid' => $region->uid,
+					'parent' => null,
+					'title' => $region->title,
+				),
+				'container' => array(
+					'description' => $region->description,
+					'beginDate' => DateHelper::getDate($region->startDate),
+					'endDate' => DateHelper::getDate($region->endDate),
+					'image' => $region->imageUrl(),
+					'startPoint' => null !== $startPoint ? array(
+						'uid' => $startPoint->uid,
+						'title' => $startPoint->title,
+						'image' => count($startPoint->images) ? $startPoint->images[0]->getUrl('small') : null,
+						'll' => $startPoint->ll
+					) : null
+				)
+			);
+			
+			foreach ($region->regions as $j => $city) {
+				$startPoint = Points::startPoint($city->startPointId);
+				$data[$i]['cities'][$j] = array(
+					'header' => array(
+						'uid' => $city->uid,
+						'parent' => $city->parent->uid,
+						'title' => $city->title,
+					),
+					'container' => array(
+						'description' => $city->description,
+						'beginDate' => DateHelper::getDate($city->startDate),
+						'endDate' => DateHelper::getDate($city->endDate),
+						'image' => $city->imageUrl(),
+						'startPoint' => null !== $startPoint ? array(
+							'uid' => $startPoint->uid,
+							'title' => $startPoint->title,
+							'image' => count($startPoint->images) ? $startPoint->images[0]->getUrl('small') : null,
+							'll' => $startPoint->ll
+						) : null
+					)
+				);
+				
+				foreach ($city->routs as $rout) {
+					$images = array();
+					foreach ($rout->images as $image) {
+						$images[] = $image->getUrl('small');
 					}
-				}
-			break;
-		
-			case 'groups':
-				if (null === ($cityModel = Cities::model()->findByAttributes(array('uid' => $_POST['id'])))) {
-					$this->jsonEcho(array(
-						'type' => self::TYPE_ERROR,
-						'errors' => array('Неверный uid города.')
-					));
-				}
-				foreach ($cityModel->groups as $i => $group) {
-					$data[$i] = array(
+					$data[$i]['cities'][$j]['routs'][] = array(
 						'header' => array(
-							'uid' => $group->uid,
-							'parent' => $cityModel->uid,
-							'title' => $group->typeGroup->title,
+							'uid' => $rout->uid,
+							'title' => $rout->title,
 						),
 						'container' => array(
-							'typeId' => $group->typeGroup->id,
-							'description' => $group->typeGroup->description,
-							'active' => $group->active,
-							'image' => $group->typeGroup->image,
-							'listing' => ArrayHelper::columnValues($group->marks, 'uid')
+							'description' => $rout->description,
+							'complexity' => $rout->complexity,
+							'images' => $images
 						)
 					);
 				}
-			break;
+			}
 		}
+		
 		$this->jsonEcho(array(
 			'type' => self::TYPE_OK,
 			'data' => $data

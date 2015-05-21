@@ -6,7 +6,7 @@
 	<div class="panel-body">
 		<div class="list-filter">
 			<select id="filter-region" name="regionId" class="form-control">
-				<option value="">Выберите регион</option>
+				<option value="">Все регионы</option>
 				<?php foreach ($regions as $region) : ?>
 					<option class="parent" value="<?=$region->id?>"><?=$region->title?></option>
 					<?php foreach($region->regions as $child) : ?>

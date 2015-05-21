@@ -14,7 +14,6 @@ class Points extends ApModel
 			array('parentId, rating, ratingTeh, active', 'numerical', 'integerOnly' => true),
 			array('uid', 'length', 'max' => 32),
 			array('title', 'length', 'max' => 128),
-			array('shortDesc', 'length', 'max' => 255),
 			array('ll', 'length', 'max' => 40),
 			array('fullDesc', 'safe')
 		);
@@ -66,5 +65,32 @@ class Points extends ApModel
 			return array();
 		}
 		return self::model()->findAll();
+	}
+	
+	public static function newPoint($regionId, $isStart = false)
+	{
+		$regionModel = Regions::model()->findByPk($regionId);
+		$model = new Points();
+		$model->title = $regionModel->title.' основной';
+		$model->rating = 0;
+		$model->ratingTeh = 0;
+		$model->save();
+		$pointRegion = new PointRegions();
+		$pointRegion->pointId = $model->id;
+		$pointRegion->regionId = $regionModel->id;
+		$pointRegion->save();
+		if ($isStart) {
+			$regionModel->startPointId = $model->id;
+			$regionModel->save();
+		}
+		return $model;
+	}
+	
+	public static function startPoint($id)
+	{
+		if (null === ($model = self::model()->findByPk($id))) {
+			return null;
+		}
+		return $model;
 	}
 }
