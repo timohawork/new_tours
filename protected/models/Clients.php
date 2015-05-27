@@ -32,10 +32,11 @@ class Clients extends ApModel
 	public function rules()
 	{
 		return array(
-			array('name, uid, login', 'required'),
+			array('name, login, password', 'required'),
 			array('active', 'numerical', 'integerOnly' => true),
 			array('name, phone, email, socialId, login', 'length', 'max' => 100),
-			array('uid, password', 'length', 'max' => 32),
+			array('email', 'email'),
+			array('password', 'length', 'min' => 6, 'max' => 32),
 			array('login, email', 'unique'),
 			array('lastVisit', 'safe')
 		);

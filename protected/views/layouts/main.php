@@ -77,7 +77,7 @@
 			<?=$content?>
 		<?php endif; ?>
 		
-		<?php if (!$isSupport) : ?>
+		<?php if (!$isSupport && Yii::app()->controller->id !== 'api') : ?>
 			<div id="support" class="panel panel-info">
 				<a href="#" class="form-toggle"><i class="fa fa-comment fa-flip-horizontal fa-2x"></i></a>
 				<div class="panel-heading">

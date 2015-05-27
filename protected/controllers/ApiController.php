@@ -17,7 +17,7 @@ class ApiController extends ApController
 		return array(
 			array('allow',
 				'users' => array('?'),
-				'actions' => array('index', 'login')
+				'actions' => array('index', 'login', 'registration')
 			),
 			array('deny',
 				'users' => array('?'),
@@ -42,6 +42,77 @@ class ApiController extends ApController
 			->registerCssFile('/css/api.css')
 			->registerScriptFile('/js/app/api.js');
 		$this->render('index', array());
+	}
+	
+	public function actionLogin()
+	{
+		if (!Yii::app()->user->isGuest) {
+			$this->jsonEcho(array(
+				'type' => self::TYPE_ERROR,
+				'errors' => array('Вход уже выполнен.')
+			));
+		}
+		if (empty($_POST)) {
+			$this->jsonEcho(array(
+				'type' => self::TYPE_ERROR,
+				'errors' => array('Неверный запрос.')
+			));
+		}
+		$loginModel = new LoginForm();
+		$loginModel->isClient = true;
+		$loginModel->attributes = $_POST;
+		if ($loginModel->validate() && $loginModel->login()) {
+			$this->jsonEcho(array(
+				'type' => self::TYPE_OK,
+				'data' => null
+			));
+		}
+		$this->jsonEcho(array(
+			'type' => self::TYPE_ERROR,
+			'errors' => $loginModel->getErrors()
+		));
+	}
+	
+	public function actionRegistration()
+	{
+		if (!Yii::app()->user->isGuest) {
+			$this->jsonEcho(array(
+				'type' => self::TYPE_ERROR,
+				'errors' => array('Учётная запиь уже существует.')
+			));
+		}
+		if (empty($_POST)) {
+			$this->jsonEcho(array(
+				'type' => self::TYPE_ERROR,
+				'errors' => array('Неверный запрос.')
+			));
+		}
+		$client = new Clients();
+		$client->login = ArrayHelper::val($_POST, 'login');
+		$client->password = ArrayHelper::val($_POST, 'password');
+		$client->email = ArrayHelper::val($_POST, 'email');
+		$client->name = ArrayHelper::val($_POST, 'name');
+		$client->phone = ArrayHelper::val($_POST, 'phone');
+		$client->socialId = ArrayHelper::val($_POST, 'socialId');
+		$client->active = 1;
+		if (!$client->validate()) {
+			$this->jsonEcho(array(
+				'type' => self::TYPE_ERROR,
+				'errors' => $client->getErrors()
+			));
+		}
+		$loginModel = new LoginForm();
+		$loginModel->isClient = true;
+		$loginModel->email = $client->email;
+		$loginModel->password = $client->password;
+		$client->password = md5($client->password);
+		$client->save();
+		$loginModel->login();
+		
+		$this->jsonEcho(array(
+			'type' => self::TYPE_OK,
+			'data' => array('uid' => $client->uid)
+		));
 	}
 	
 	public function actionListing()
@@ -121,110 +192,21 @@ class ApiController extends ApController
 		));
 	}
 	
-	public function actionTypes_List()
+	public function actionOrders()
 	{
-		$this->jsonEcho(array(
-			'type' => self::TYPE_OK,
-			'data' => Types::getTypes()
-		));
-	}
-	
-	public function actionObj_Get()
-	{
-		if (empty($_POST) || empty($_POST['uid'])) {
-			$this->jsonEcho(array(
-				'type' => self::TYPE_ERROR,
-				'errors' => array('Неверный uid.')
-			));
-		}
-		
-		foreach (array(Marks::model(), CityGroups::model(), Cities::model(), Regions::model()) as $model) {
-			if (null !== ($objModel = $model->findByAttributes(array('uid' => $_POST['uid'])))) {
-				break;
-			}
-		}
-		
-		if (null === $objModel) {
-			$this->jsonEcho(array(
-				'type' => self::TYPE_ERROR,
-				'errors' => array('Неверный uid.')
-			));
-		}
-		
-		$data = array(
-			'header' => array(),
-			'container' => array()
-		);
-		
-		if ($objModel instanceof Marks) {
-			$data['header'] = array(
-				'uid' => $objModel->uid,
-				'parent' => $objModel->group->uid,
-				'type' => 'obj',
-				'title' => $objModel->title,
-			);
-			$data['container'] = array(
-				'groupId' => $objModel->groupId,
-				'typeId' => $objModel->typeId,
-				'description' => $objModel->description,
-				'address' => $objModel->address,
-				'coord' => $objModel->coord,
-				'phone' => $objModel->phone,
-				'email' => $objModel->email,
-				'skype' => $objModel->skype,
-				'viber' => $objModel->viber,
-				'site' => $objModel->site,
-				'active' => (int)$objModel->active,
-				'images' => array(),
-				'attr' => array()
-			);
-			foreach ($objModel->markPhotoses as $image) {
-				$data['container']['images'][][] = $image->name;
-			}
-			foreach ($objModel->attr as $attr) {
-				$data['container']['attr'][] = array(
-					'title' => $attr->type->title,
-					'value' => 'on' === $attr->value ? 1 : $attr->value
-				);
-			}
-		}
-		else if ($objModel instanceof Regions) {
-			$data['header'] = array(
-				'uid' => $objModel->uid,
-				'parent' => null,
-				'type' => 'dir',
-				'title' => $objModel->title,
-			);
-			$data['container'] = array(
-				'description' => $objModel->description,
-				'active' => (int)$objModel->active,
-				'image' => $objModel->image
-			);
-		}
-		else if ($objModel instanceof Cities) {
-			$data['header'] = array(
-				'uid' => $objModel->uid,
-				'parent' => $objModel->region->uid,
-				'type' => 'dir',
-				'title' => $objModel->title,
-			);
-			$data['container'] = array(
-				'description' => $objModel->description,
-				'active' => (int)$objModel->active,
-				'image' => $objModel->image
-			);
-		}
-		else if ($objModel instanceof CityGroups) {
-			$data['header'] = array(
-				'uid' => $objModel->uid,
-				'parent' => $objModel->city->uid,
-				'type' => 'dir',
-				'title' => $objModel->typeGroup->title,
-			);
-			$data['container'] = array(
-				'description' => $objModel->typeGroup->description,
-				'active' => (int)$objModel->active,
-				'image' => $objModel->typeGroup->image
+		$data = array();
+		$orders = Orders::model()->findAllByAttributes(array(
+			'clientId' => Yii::app()->user->id
+		), array('order' => 'isPlaced DESC'));
+		foreach ($orders as $order) {
+			$data[] = array(
+				'uid' => $order->uid,
+				'tour' => array(),
+				'passCount' => $order->passCount,
+				'isPaid' => $order->isPaid,
+				'paymentType' => $order->paymentType,
+				'summ' => $order->summ,
+				'isPlaced' => $order->isPlaced
 			);
 		}
 		
@@ -234,74 +216,87 @@ class ApiController extends ApController
 		));
 	}
 	
-	public function actionMark_Edit()
+	public function actionOrder_Create()
 	{
-		if (empty($_POST)) {
+		if (empty($_POST) || empty($_POST['tourUid'])) {
 			$this->jsonEcho(array(
 				'type' => self::TYPE_ERROR,
 				'errors' => array('Неверный запрос.')
 			));
 		}
-		if (!empty($_POST['uid']) && null === ($markModel = Marks::model()->findByAttributes(array('uid' => $_POST['uid'])))) {
+		if (null === ($tourModel = Tours::model()->findByAttributes(array('uid' => $_POST['tourUid'])))) {
 			$this->jsonEcho(array(
 				'type' => self::TYPE_ERROR,
-				'errors' => array('Неверный uid.')
+				'errors' => array('Экскурсии с таким uid не существует.')
 			));
 		}
-		if (empty($_POST['uid'])) {
-			$markModel = new Marks();
+		$model = new Orders();
+		$model->tourId = $tourModel->id;
+		$model->clientId = Yii::app()->user->id;
+		$model->isPaid = 0;
+		$model->isPlaced = 0;
+		$model->passCount = ArrayHelper::val($_POST, 'passCount', 1);
+		if (!empty($_POST['summ'])) {
+			$model->summ = (int)$_POST['summ'];
+			$model->paymentType = isset($_POST['paymentType']) ? (int)$_POST['paymentType'] : Orders::PAYMENT_CASH;
 		}
+		if (!$model->validate()) {
+			$this->jsonEcho(array(
+				'type' => self::TYPE_ERROR,
+				'errors' => $model->getErrors()
+			));
+		}
+		$model->save();
 		
-		$markModel->groupId = (int)ArrayHelper::val($_POST, 'cityId', $markModel->groupId);
-		$markModel->typeId = (int)ArrayHelper::val($_POST, 'typeId', $markModel->typeId);
-		$markModel->title = ArrayHelper::val($_POST, 'title', $markModel->title);
-		$markModel->description = ArrayHelper::val($_POST, 'description', $markModel->description);
-		$markModel->address = ArrayHelper::val($_POST, 'address', $markModel->address);
-		$markModel->coord = ArrayHelper::val($_POST, 'coord', $markModel->coord);
-		$markModel->phone = ArrayHelper::val($_POST, 'phone', $markModel->phone);
-		$markModel->email = ArrayHelper::val($_POST, 'email', $markModel->email);
-		$markModel->skype = ArrayHelper::val($_POST, 'skype', $markModel->skype);
-		$markModel->viber = ArrayHelper::val($_POST, 'viber', $markModel->viber);
-		$markModel->site = ArrayHelper::val($_POST, 'site', $markModel->site);
-		$markModel->active = '' !== $_POST['active'] ? (int)$_POST['active'] : $markModel->active;
-		if (!$markModel->validate()) {
-			$this->jsonEcho(array(
-				'type' => self::TYPE_ERROR,
-				'errors' => $markModel->getErrors()
-			));
-		}
-		$markModel->save();
 		$this->jsonEcho(array(
 			'type' => self::TYPE_OK,
-			'data' => empty($_POST['uid']) ? array('uid' => $markModel->uid) : null
+			'data' => array('uid' => $model->uid)
 		));
 	}
 	
-	public function actionLogin()
+	public function actionOrder_Edit()
 	{
-		if (!Yii::app()->user->isGuest) {
-			$this->jsonEcho(array(
-				'type' => self::TYPE_ERROR,
-				'errors' => array('Вход уже выполнен.')
-			));
-		}
-		if (empty($_POST)) {
+		if (empty($_POST) || empty($_POST['uid'])) {
 			$this->jsonEcho(array(
 				'type' => self::TYPE_ERROR,
 				'errors' => array('Неверный запрос.')
 			));
 		}
-		$loginModel = new LoginForm();
-		$loginModel->attributes = $_POST;
-		if ($loginModel->validate() && $loginModel->login()) {
+		$model = Orders::model()->findByAttributes(array(
+			'uid' => $_POST['uid'],
+			'clientId' => Yii::app()->user->id
+		));
+		if (null === $model) {
 			$this->jsonEcho(array(
-				'type' => self::TYPE_OK,
-				'data' => null
+				'type' => self::TYPE_ERROR,
+				'errors' => array('Заказа с таким uid не существует.')
 			));
 		}
+		if (!empty($_POST['tourUid']) && null === ($tourModel = Tours::model()->findByAttributes(array('uid' => $_POST['tourUid'])))) {
+			$this->jsonEcho(array(
+				'type' => self::TYPE_ERROR,
+				'errors' => array('Экскурсии с таким uid не существует.')
+			));
+		}
+		else if (!empty($_POST['tourUid'])) {
+			$model->tourId = $tourModel->id;
+		}
+		$model->passCount = (int)ArrayHelper::val($_POST, 'passCount', $model->passCount);
+		$model->summ = (int)ArrayHelper::val($_POST, 'summ', $model->summ);
+		if (isset($_POST['paymentType']) && $_POST['paymentType'] !== '') {
+			$model->paymentType = (int)$_POST['paymentType'];
+		}
+		if (!$model->validate()) {
+			$this->jsonEcho(array(
+				'type' => self::TYPE_ERROR,
+				'errors' => $model->getErrors()
+			));
+		}
+		$model->save();
+		
 		$this->jsonEcho(array(
-			'type' => self::TYPE_ERROR,
-			'errors' => $loginModel->getErrors()
+			'type' => self::TYPE_OK,
+			'data' => null
 		));
 	}
 }

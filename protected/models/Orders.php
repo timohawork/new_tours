@@ -38,6 +38,7 @@ class Orders extends ApModel
 		return array(
 			array('tourId, clientId, passCount', 'required'),
 			array('tourId, clientId, passCount, isPaid, paymentType, summ', 'numerical', 'integerOnly' => true),
+			array('paymentType', 'in', 'range' => array(self::PAYMENT_CASH, self::PAYMENT_CASHLESS)),
 			array('uid', 'length', 'max' => 32)
 		);
 	}

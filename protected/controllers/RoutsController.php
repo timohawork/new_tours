@@ -147,8 +147,24 @@ class RoutsController extends ApController
 			}
 		}
 		
-		if (!$model->isNewRecord) {
-			$regionPoints = Points::getPoints(array('regionId' => ArrayHelper::columnValues($model->regions, 'id')));
+		if (!$model->isNewRecord || !empty($_GET['region'])) {
+			$regionsIds = array();
+			if (!$model->isNewRecord) {
+				$regionsIds = ArrayHelper::columnValues($model->regions, 'id');
+				foreach ($model->regions as $region) {
+					if (!empty($region->parent)) {
+						$regionsIds[] = $region->parent->id;
+					}
+				}
+			}
+			else {
+				$region = Regions::model()->findByPk($_GET['region']);
+				$regionsIds[] = $region->id;
+				if (!empty($region->parent)) {
+					$regionsIds[] = $region->parent->id;
+				}
+			}
+			$regionPoints = Points::getPoints(array('regionId' => $regionsIds));
 		}
 		else {
 			$regionPoints = array();

@@ -8178,3 +8178,82 @@ HTTP_REFERER=http://new-tours/api
 2015/05/21 09:40:27 [warning] [application] Не удалось присвоить небезопасный атрибут "method" класса "LoginForm".
 in /var/www/new-tours/protected/controllers/ApiController.php (295)
 in /var/www/new-tours/public/index.php (13)
+2015/05/21 11:57:47 [warning] [application] Не удалось присвоить небезопасный атрибут "method" класса "LoginForm".
+in /var/www/new-tours/protected/controllers/ApiController.php (63)
+in /var/www/new-tours/public/index.php (13)
+2015/05/21 11:57:52 [warning] [application] Не удалось присвоить небезопасный атрибут "method" класса "LoginForm".
+in /var/www/new-tours/protected/controllers/ApiController.php (63)
+in /var/www/new-tours/public/index.php (13)
+2015/05/21 12:00:29 [warning] [application] Не удалось присвоить небезопасный атрибут "method" класса "LoginForm".
+in /var/www/new-tours/protected/controllers/ApiController.php (63)
+in /var/www/new-tours/public/index.php (13)
+2015/05/21 12:38:07 [error] [php] include(Order.php): failed to open stream: No such file or directory (/var/www/new-tours/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/new-tours/protected/controllers/ApiController.php(191): spl_autoload_call()
+#1 /var/www/new-tours/framework/web/actions/CInlineAction.php(49): ApiController->actionOrder_Create()
+#2 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): ApiController->runAction()
+#4 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#5 /var/www/new-tours/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#6 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): ApiController->filterAccessControl()
+#7 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#8 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#9 /var/www/new-tours/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#10 /var/www/new-tours/framework/web/CWebApplication.php(282): ApiController->run()
+#11 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#12 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/new-tours/public/index.php(13): CWebApplication->run()
+REQUEST_URI=/api/order_create
+in /var/www/new-tours/protected/controllers/ApiController.php (191)
+in /var/www/new-tours/public/index.php (13)
+2015/05/21 12:38:19 [error] [php] include(Order.php): failed to open stream: No such file or directory (/var/www/new-tours/framework/YiiBase.php:427)
+Stack trace:
+#0 /var/www/new-tours/protected/controllers/ApiController.php(191): spl_autoload_call()
+#1 /var/www/new-tours/framework/web/actions/CInlineAction.php(49): ApiController->actionOrder_Create()
+#2 /var/www/new-tours/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): ApiController->runAction()
+#4 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#5 /var/www/new-tours/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#6 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): ApiController->filterAccessControl()
+#7 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#8 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#9 /var/www/new-tours/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#10 /var/www/new-tours/framework/web/CWebApplication.php(282): ApiController->run()
+#11 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#12 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /var/www/new-tours/public/index.php(13): CWebApplication->run()
+REQUEST_URI=/api/order_create
+in /var/www/new-tours/protected/controllers/ApiController.php (191)
+in /var/www/new-tours/public/index.php (13)
+2015/05/21 12:41:43 [error] [php] Undefined variable: tourModel (/var/www/new-tours/protected/controllers/ApiController.php:239)
+Stack trace:
+#0 /var/www/new-tours/framework/web/filters/CFilterChain.php(133): ApiController->runAction()
+#1 /var/www/new-tours/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/new-tours/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/new-tours/framework/web/filters/CInlineFilter.php(58): ApiController->filterAccessControl()
+#4 /var/www/new-tours/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/new-tours/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/new-tours/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#7 /var/www/new-tours/framework/web/CWebApplication.php(282): ApiController->run()
+#8 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#10 /var/www/new-tours/public/index.php(13): CWebApplication->run()
+REQUEST_URI=/api/order_edit
+in /var/www/new-tours/protected/controllers/ApiController.php (239)
+in /var/www/new-tours/public/index.php (13)
+2015/05/27 11:43:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "favicon.ico".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/05/27 11:43:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "favicon.ico".' in /var/www/new-tours/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/new-tours/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /var/www/new-tours/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/new-tours/public/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---

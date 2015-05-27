@@ -24,9 +24,10 @@ class UserIdentity extends CUserIdentity
 		return $this->userId;
 	}
 	
-	public function authenticate()
+	public function auth($isClient)
 	{
-		$user = Users::model()->findByAttributes(array('email' => $this->email));
+		$model = $isClient ? Clients::model() : Users::model();
+		$user = $model->findByAttributes(array('email' => $this->email));
 		if (null === $user) {
 			$this->errorCode = self::ERROR_EMAIL_INVALID;
 		}

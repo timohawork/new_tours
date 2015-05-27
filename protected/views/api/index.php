@@ -6,10 +6,11 @@
 		<div class="col-sm-8">
 			<select id="method-select" name="method" class="form-control">
 				<option value="login">login</option>
+				<option value="registration">registration</option>
 				<option value="listing">listing</option>
-				<?php /*<option value="types_list">types_list</option>
-				<option value="obj_get">obj_get</option>
-				<option value="mark_edit">mark_edit</option>*/ ?>
+				<option value="orders">orders</option>
+				<option value="order_create">order_create</option>
+				<option value="order_edit">order_edit</option>
 			</select>
 		</div>
 	</div>
